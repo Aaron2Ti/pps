@@ -1,0 +1,27 @@
+<% for assemble in @assembles %>
+  <%= paper_icon assemble %> <%= assemble.filename %>
+  <%= link_to_remote '变参', :url => change_paper_path(assemble),
+    :method => :get,
+    :update => 'content',
+    :loading  => "$('mask').show();",
+    :complete => "$('mask').hide();"
+  %>  
+  <%= link_to '下载', download_paper_path(assemble) %>
+  <%= link_to_remote '预览', :url => paper_path(assemble),
+    :method => :get,
+    :update => 'preview',
+    :loading  => "$('mask').show();",
+    :complete => "$('mask').hide();"
+  %>  
+  <ul>
+    <%= render :partial => 'papers/list', :locals => {:items => assemble.parts} %>
+  </ul>
+  <hr/>
+<% end %>
+<% if @parts.size > 0 %>
+  <ul>
+  其余零件图：
+  <%= render :partial => 'papers/list', :locals => {:items => @parts} %>
+  </ul>
+<% end %>
+

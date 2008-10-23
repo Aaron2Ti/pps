@@ -1,0 +1,16 @@
+<h3>请配置图纸<strong><%= @paper.filename %></strong>的参数</h3>
+<%= render(:partial => 'table', 
+      :locals => {:parameters => @parameters}) if @parameters.size > 0 %>
+<br />
+<%= link_to_remote '新参数', :url => new_parameter_path,
+  :method => :get,
+  :update => 'content',
+  :loading  => "$('mask').show();",
+  :complete => "$('mask').hide();"
+%> |
+<%= link_to_remote '变参', :url => change_paper_path(params[:paper_id]),
+  :method => :get,
+  :update => 'content',
+  :loading  => "$('mask').show();",
+  :complete => "$('mask').hide();"
+%>

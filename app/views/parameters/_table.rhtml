@@ -1,0 +1,28 @@
+<table>
+  <tr>
+    <th>描述</th>
+    <th>参数</th>
+    <th>初始值</th>
+    <th></th>
+    <th></th>
+  </tr>
+<% for parameter in parameters %>
+  <tr>
+    <td><%=h parameter.desc %></td>
+    <td><%=h parameter.name %></td>
+    <td><%=h parameter.default %></td>
+    <td><%= link_to_remote '编辑', 
+      :url => edit_parameter_path(params[:paper_id], parameter),
+      :method => :get,
+      :update => 'content',
+      :loading  => "$('mask').show();",
+      :complete => "$('mask').hide();" %></td>
+    <td><%= link_to_remote '删除', 
+      :url => parameter_path(params[:paper_id], parameter), 
+      :confirm => '确认删除?', :method => :delete,
+      :update => 'content',
+      :loading  => "$('mask').show();",
+      :complete => "$('mask').hide();" %></td>
+  </tr>
+<% end %>
+</table>

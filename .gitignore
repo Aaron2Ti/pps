@@ -1,0 +1,8 @@
+Desktop.ini
+bucket.zip
+*.log
+*.swp
+todo.txt
+db/database.yml
+log/*
+tmp/*

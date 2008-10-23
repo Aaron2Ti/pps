@@ -1,0 +1,23 @@
+<p>
+  <b>Name:</b>
+  <%=h @parameter.name %>
+</p>
+
+<p>
+  <b>Default:</b>
+  <%=h @parameter.default %>
+</p>
+
+<p>
+  <b>Desc:</b>
+  <%=h @parameter.desc %>
+</p>
+
+<p>
+  <b>Paper:</b>
+  <%=h @parameter.paper_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_parameter_path(params[:paper_id], @parameter) %> |
+<%= link_to 'Back', parameters_path(params[:paper_id]) %>

@@ -1,0 +1,10 @@
+请上传一套新图纸:
+- form_for :archive, :url => archives_path, :html => {:multipart => true} do |f|
+  %ul
+    %li
+      %label  图档描述:
+      = f.text_field :desc
+    %li
+      %label  选择您要上传的图纸:
+      = f.file_field :upload_file 
+    = submit_tag '上传'

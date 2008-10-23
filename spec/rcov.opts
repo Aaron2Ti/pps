@@ -1,0 +1,4 @@
+--exclude "spec/*,gems/*" 
+--rails
+--no-html
+-T

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>参数化设计系统</title>
+  <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+	<link rel="shortcut icon" href="/favicon.ico" />
+	<link rel="icon" href="/favicon.ico" />
+  <%= stylesheet_link_tag 'screen.css', :media => 'all' %>
+  <%= stylesheet_link_tag 'print.css', :media => 'print' %>
+  <!--[if IE]>
+  <%= stylesheet_link_tag 'lib/ie.css', :media => 'screen, projection' %>
+  <![endif]-->
+</head>
+<body>
+  <noscript>This System Need Javascript Enabled!</noscript>
+  <%= javascript_include_tag 'prototype', 'effects', 'application' %>
+  <div class="container">
+    <div class="column span-24 header">
+      <br/>
+      <h2 style="color: #3aadd3" >仪器仪表行业供应链协同平台 - <span style="color: #ed6f99">参数化设计系统</span></h2>
+    </div>
+    <div id="mask" class="transparent-message" style="display: none;">
+      <h1 style="color: red">Loading ...</h1>
+      <%= image_tag 'ajax-loader.gif' %>
+    </div>
+    <div id="preview" class="column span-12">
+      <embed src="rose.wrl" type="model/vrml" height="450" width="470"
+        consolemode="1" vrml_background_color="#1D1D20" 
+        skin="{46BB95BF-8EB4-481A-A1EF-50D43FC32B9D}" />
+    </div>
+    <div class="column span-12 last">
+      <div class="menu">
+        <ul>
+          <li>
+            <%= link_to_remote '<span>新图档</span>',
+              :url => new_archive_path, :method => :get,
+              :update => 'content',
+              :loading  => "$('mask').show();",
+              :complete => "$('mask').hide();" %>
+          </li>                                        
+          <li class="current">
+            <%= link_to_remote '<span>图档列表</span>',
+              :url => archives_path, :method => :get,
+              :update => 'content',
+              :loading  => "$('mask').show();",
+              :complete => "$('mask').hide();" %>
+          </li>
+          <li><a href="#"><span>图纸列表</span></a></li>
+          <li><a href="#"><span>参数列表</span></a></li>
+        </ul>
+      </div>
+      <div id="content">
+        <%= yield %>
+      </div>
+    </div>
+    <div class="column span-24 footer">
+      Copyright <a href="http://www.cam.com.cn">机械科学研究院</a>
+      <a href="downloads/cortvrml.exe">3D预览插件</a>
+    </div>
+  </div>
+</body>
+</html>

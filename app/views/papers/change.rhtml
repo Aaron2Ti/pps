@@ -1,0 +1,60 @@
+<% if @part %>
+  <% form_remote_tag :url => rebuild_paper_path(@part), 
+    :method => :put,
+    :update => 'preview',
+    :loading  => "$('mask').show();",
+    :complete => "$('mask').hide();" do %>
+    <div class="form-info">
+      <%= file_icon @part.filename %><%= @part.filename %>
+    </div>
+    <ul>
+      <% @part.parameters.each do |p| %>
+      <li>
+        <label for=<%= "parameters[#{p.id}]" %>>
+          <%= p.desc+': ' %></label>
+        <div>
+          <%= text_field_tag "parameters[#{p.id}]", "#{p.default}" %>
+        </div>
+      </li>
+      <% end %>
+      <li>
+        <%= submit_tag '变参' %>
+      </li>
+    </ul>
+    <%= hidden_field_tag 'paper_type', 'part' %>
+  <% end if @part.parameters.size > 0 %>
+<% else %>
+  <% form_remote_tag :url => rebuild_paper_path(@assemble), 
+    :method => :put,
+    :update => 'preview',
+    :loading  => "$('mask').show();",
+    :complete => "$('mask').hide();" do %>
+    <div class="form-info">
+      <%= file_icon @assemble.filename %><%= @assemble.filename %>
+    </div>
+    <ul>
+      <% @assemble.parts.each do |part| %>
+        <% if part.parameters.size > 0 then %>
+        <li>
+          <label for=<%= dom_id(part) %>><%= part.filename %></label>
+          <div id=<%= dom_id(part) %> class="combo-fields">
+            <% part.parameters.each do |p| %>
+            <div >
+              <%= text_field_tag "parameters[#{part.id}][#{p.id}]",
+                "#{p.default}" %>
+              <label for=<%= "parameters[#{part.id}][#{p.id}]" %>>
+                <%= p.desc+': ' %>
+              </label>
+            </div>
+            <% end %>
+          </div>
+        </li>
+        <% end %>
+      <% end %>
+      <li>
+        <%= hidden_field_tag 'paper_type', 'assemble' %>
+        <%= submit_tag '变参' %>
+      </li>
+    </ul>
+  <% end if @assemble.parameters.size > 0 %>
+<% end %>
