@@ -1,10 +1,8 @@
 class CreateArchives < ActiveRecord::Migration
   def self.up
     create_table :archives do |t|
-      t.column "desc", :string
-      t.column "filename", :string
-      t.column "size", :integer
-      t.column "content_type", :string
+      t.string 'desc', 'filename', 'content_type'
+      t.integer 'size'
     end
   end
 
