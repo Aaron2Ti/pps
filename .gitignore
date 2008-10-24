@@ -2,7 +2,9 @@ Desktop.ini
 bucket.zip
 *.log
 *.swp
+db/*.sqlite3
 todo.txt
 db/database.yml
+doc/*
 log/*
 tmp/*

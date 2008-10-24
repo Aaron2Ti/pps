@@ -18,8 +18,8 @@ describe Archive do
                               :original_filename => 'Invalide File',
                               :size              => 0)
     @archive.upload_file = @invalid_file
-    @archive.valid?
-    @archive.errors[:base].should include 'Only Accept ZIP Archives'
+    @archive.should have(1).error_on :base
+#     @archive.errors[:base].should include 'Only Accept ZIP Archives'
   end
 
   it 'should write the attach file after save' do
@@ -29,7 +29,8 @@ describe Archive do
 
   it 'should unzip the attachment' do
     @archive.save
-    Dir.entries(File.join(@archive.upload_path, 'tmp')).size.should eql(5)
+    Dir.new(File.join(@archive.upload_path, 'tmp')).should have(5).entries
+#     Dir.entries(File.join(@archive.upload_path, 'tmp')).size.should eql(5)
     @archive.destroy
   end
 
