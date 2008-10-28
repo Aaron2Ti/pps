@@ -2,11 +2,13 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
 describe Paper do
   before(:each) do
-    @valid_attributes = {
-    }
+    @archive = Archive.new
+    flexmock(@archive, {:id => 1})
+    @paper = Paper.new(:filename => 'test.sldprt',
+                      :path => 'tmp')
   end
 
-  it "should create a new instance given valid attributes" do
-    Paper.create!(@valid_attributes)
+  it do
+
   end
 end

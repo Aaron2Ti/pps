@@ -3,8 +3,23 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Archive do
   before(:each) do
     @archive = Archive.new
-    @archive.upload_file = fixture_file_upload('/../fixtures/bucket.zip',
-                                                'application/x-zip-compressed') 
+
+    @upload_file = flexmock('upload_file',
+                            :original_filename => 'bucket.zip',
+                            :content_type      => 'application/x-zip-compressed',
+                            :size              => 20)
+    @archive.upload_file = @upload_file
+#       fixture_file_upload('/../fixtures/bucket.zip',
+#                                                 'application/x-zip-compressed') 
+  end
+
+  it 'should have same filename with the upload file' do
+    @archive.filename.should eql 'bucket.zip'
+  end
+
+  it '\'s filepath should be uploads/archive_id'
+
+  it 'should delete all the descendent files' do
   end
 
   it 'should accept zip formate file' do
@@ -19,22 +34,31 @@ describe Archive do
                               :size              => 0)
     @archive.upload_file = @invalid_file
     @archive.should have(1).error_on :base
-#     @archive.errors[:base].should include 'Only Accept ZIP Archives'
   end
 
-  it 'should write the attach file after save' do
+end
+
+
+describe Archive, 'unzip, save and destroy' do
+  before :each do
+    @archive = Archive.new
+    @archive.upload_file = fixture_file_upload('/../fixtures/bucket.zip',
+                                                'application/x-zip-compressed') 
     @archive.save
-    File.exist?(@archive.file_path).should be_true
   end
 
-  it 'should unzip the attachment' do
-    @archive.save
-    Dir.new(File.join(@archive.upload_path, 'tmp')).should have(5).entries
-#     Dir.entries(File.join(@archive.upload_path, 'tmp')).size.should eql(5)
+  it 'should delet descendent file after destroy' do
     @archive.destroy
+    File.exist?(@archive.file_path).should be_false
+  end
+
+  it 'should write the attach file and  unzip it after save' do
+    File.exist?(@archive.file_path).should be_true
+    Dir.new(File.join(@archive.upload_path, 'tmp')).should have(5).entries
   end
 
   after :each do
     @archive.destroy
   end
+
 end

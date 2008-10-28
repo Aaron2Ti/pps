@@ -63,6 +63,6 @@ private
   end
 
   def delete_file
-    FileUtils.rm_rf("#{upload_path}")
+    FileUtils.rm_rf(upload_path) if File.exist?(upload_path)
   end
 end

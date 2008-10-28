@@ -5,6 +5,6 @@ bucket.zip
 db/*.sqlite3
 todo.txt
 db/database.yml
-doc/*
+doc/*.*
 log/*
 tmp/*

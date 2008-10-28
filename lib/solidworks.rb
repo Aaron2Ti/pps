@@ -1,5 +1,5 @@
 # Do some view modify in linux disable 'win32ole'
-require 'win32ole'
+# require 'win32ole'
 require 'ftools'
 require 'encoding_filter'
 

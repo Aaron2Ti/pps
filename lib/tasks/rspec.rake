@@ -14,6 +14,7 @@ end
 
 task :default => :spec
 task :stats => "spec:statsetup"
+task :rs => "spec:server:restart"
 
 desc "Run all specs in spec directory (excluding plugin specs)"
 Spec::Rake::SpecTask.new(:spec => spec_prereq) do |t|
@@ -124,8 +125,11 @@ namespace :spec do
       unless File.exist?(daemonized_server_pid)
         $stderr.puts "No server running."
       else
-        $stderr.puts "Reloading down spec_server."
-        system("kill", "-s", "USR2", File.read(daemonized_server_pid).strip)
+        $stderr.puts "Restarting spec_server."
+        system("kill", "-s", "TERM", File.read(daemonized_server_pid).strip) && 
+        File.delete(daemonized_server_pid)
+
+        system("ruby", "script/spec_server", "--daemon", "--pid", daemonized_server_pid)
       end
     end
   end
