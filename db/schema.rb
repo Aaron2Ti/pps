@@ -14,16 +14,16 @@ ActiveRecord::Schema.define(:version => 3) do
   create_table "archives", :force => true do |t|
     t.string  "desc"
     t.string  "filename"
-    t.integer "size"
     t.string  "content_type"
+    t.integer "size"
   end
 
   create_table "papers", :force => true do |t|
     t.integer "archive_id"
+    t.integer "assemble_id"
     t.string  "filename"
     t.string  "desc"
     t.string  "type"
-    t.integer "assemble_id"
   end
 
   create_table "parameters", :force => true do |t|

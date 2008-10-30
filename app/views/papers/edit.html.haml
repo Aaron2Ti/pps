@@ -1,5 +1,7 @@
-- labelled_form_for @paper, :url => paper_path, :method => :put do |f|
+- form_for :paper, :url => paper_path, :method => :put, :builder => LabelFormBuilder do |f|
+  = hidden_field_tag '_method', 'put'
   %p
     = f.text_field :desc, :label => 'Description'
     = f.select(:assemble_id, assembles, :label => 'Assemble')
   = submit_tag 'Save'
+= button_to 'delete', paper_path(@paper), :method => :delete
