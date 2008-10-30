@@ -9,17 +9,15 @@ describe Archive do
                             :content_type      => 'application/x-zip-compressed',
                             :size              => 20)
     @archive.upload_file = @upload_file
-#       fixture_file_upload('/../fixtures/bucket.zip',
-#                                                 'application/x-zip-compressed') 
   end
 
   it 'should have same filename with the upload file' do
     @archive.filename.should eql 'bucket.zip'
   end
 
-  it '\'s filepath should be uploads/archive_id'
-
-  it 'should delete all the descendent files' do
+  it '\'s path should be uploads/archive_id' do
+    flexmock(@archive, {:id => 20})
+    @archive.path.should eql 'uploads/archive_20'
   end
 
   it 'should accept zip formate file' do
@@ -52,13 +50,17 @@ describe Archive, 'unzip, save and destroy' do
     File.exist?(@archive.file_path).should be_false
   end
 
-  it 'should write the attach file and  unzip it after save' do
+  it 'should write the attach file and unzip and
+      create all papers which upziped' do
     File.exist?(@archive.file_path).should be_true
-    Dir.new(File.join(@archive.upload_path, 'tmp')).should have(5).entries
+    Dir.new(File.join(@archive.full_path, 'tmp')).should have(5).entries
+  end
+
+  it 'should generate all the papers' do
+    @archive.should have(3).papers
   end
 
   after :each do
     @archive.destroy
   end
-
 end

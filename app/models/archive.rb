@@ -7,50 +7,61 @@ class Archive < ActiveRecord::Base
   has_many :parts
 
   validate :validate_upload_file
-  after_save :write_file, :unzip
+  after_save :write_file, :unzip, :generate_papers
   after_destroy :delete_file
 
   #validates_as_attachment
 
   def upload_file=(upload_file)
-    # TODO validate content-type and size
-    # application/x-zip-compressed
-    # size
       @upload_file      = upload_file
       self.filename     = @upload_file.original_filename
-#       self.content_type = @upload_file.content_type
-#       self.size         = @upload_file.size
+      self.content_type = @upload_file.content_type
+      self.size         = @upload_file.size
+  end
+
+  def path
+    "uploads/archive_#{id}"
+  end
+
+  def full_path
+    File.join RAILS_ROOT, 'public', path
   end
 
   def file_path
-    "#{upload_path}/#{filename.u2g}"
+    "#{full_path}/#{filename.u2g}"
   end
 
-  def upload_path
-    "#{RAILS_ROOT}/public/uploads/archive_#{id}"
-  end
-
-private
   # not belong this model
+  def write_file
+    if @upload_file
+      File.makedirs("#{full_path}")
+      File.open(file_path, 'wb') do |f|
+        f.write(@upload_file.read) 
+      end
+    end
+  end
+
   def unzip
     require 'zipruby'
-
     Zip::Archive.open(file_path) do |zip|
       zip.each do |entry|
-        File.makedirs("#{upload_path}/tmp")
-        File.open("#{upload_path}/tmp/#{entry.name}", 'wb') do |f|
+        tmp_dir = "#{full_path}/tmp"
+        File.makedirs(tmp_dir)
+        File.open("#{tmp_dir}/#{entry.name}", 'wb') do |f|
           f.write(entry.read) 
         end
       end
     end
   end
 
-  def write_file
-    if @upload_file
-      File.makedirs("#{upload_path}")
-      File.open(file_path, 'wb') do |f|
-        f.write(@upload_file.read) 
-      end
+  def generate_papers
+    Dir[full_path + '/tmp/*.SLDASM'].each do |e|
+      Assemble.create(:archive => self,
+                      :filename => File.basename(e).g2u)
+    end
+    Dir[full_path + '/tmp/*.SLDPRT'].each do |e|
+      Part.create(:archive => self,
+                  :filename => File.basename(e).g2u)
     end
   end
 
@@ -63,6 +74,6 @@ private
   end
 
   def delete_file
-    FileUtils.rm_rf(upload_path) if File.exist?(upload_path)
+    FileUtils.rm_rf(full_path) if File.exist?(full_path)
   end
 end

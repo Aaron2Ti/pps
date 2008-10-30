@@ -5,6 +5,7 @@
     %li
       %span= archive.desc
       %span= archive.filename
+      %span= link_to 'Papers', archive_papers_path(archive)
       %span= link_to 'Delete', archive_path(archive), :method => :delete
 -#     = link_to paper_icon(archive), archive
 -# <ul>

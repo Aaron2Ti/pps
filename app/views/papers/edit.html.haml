@@ -1,0 +1,5 @@
+- labelled_form_for @paper, :url => paper_path, :method => :put do |f|
+  %p
+    = f.text_field :desc, :label => 'Description'
+    = f.select(:assemble_id, assembles, :label => 'Assemble')
+  = submit_tag 'Save'

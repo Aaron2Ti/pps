@@ -1,29 +1,25 @@
 class PapersController < ApplicationController
   def index
-    if flash[:archive_id]
-      @archive = Archive.find(flash[:archive_id],
-                              :include => [:parts, :assembles])
-      @assembles = @archive.assembles
-      @parts = @archive.parts.find(:all, 
-                                   :conditions => {:assemble_id => nil}) 
-    else
-      @assembles = Assemble.find(:all, :include => :parts)
-      @parts = Part.find(:all, :conditions => {:assemble_id => nil})
-    end
-    render :layout => false
+    @assembles = Assemble.all(:conditions => {:archive_id => params[:archive_id]},
+                              :include => :parts)
+    @parts = Part.all(
+      :conditions => {:archive_id => params[:archive_id], :assemble_id => nil }
+    )
   end
+  
   def show
     @paper = Paper.find params[:id]
-    @vrml = @paper.relative_vrml_filename
-    render :partial => '/partials/preview', :vrml => @vrml
+#     @vrml = @paper.relative_vrml_filename
+#     render :partial => '/partials/preview', :vrml => @vrml
   end
+
   def edit
     @paper = Paper.find(params[:id])
-    render :layout => false if request.xhr?
   end
+
   def update
     Paper.find(params[:id]).update_attributes(params[:paper])
-    redirect_to papers_url
+    redirect_to paper_url(params[:id])
   end
 
   def change # change paper's parameters
