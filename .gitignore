@@ -9,3 +9,4 @@ doc
 public/uploads/*
 log/*
 tmp/*
+test

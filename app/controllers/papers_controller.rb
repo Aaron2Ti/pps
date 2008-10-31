@@ -2,9 +2,10 @@ class PapersController < ApplicationController
   def index
     @assembles = Assemble.all(:conditions => {:archive_id => params[:archive_id]},
                               :include => :parts)
-    @parts = Part.all(
-      :conditions => {:archive_id => params[:archive_id], :assemble_id => nil }
-    )
+    @parts = Part.all( :conditions => {
+      :archive_id => params[:archive_id], 
+      :assemble_id => nil 
+    })
   end
   
   def show
@@ -32,27 +33,7 @@ class PapersController < ApplicationController
   end
 
   def download
-    begin
-      part = Part.find(params[:id])
-    rescue ActiveRecord::RecordNotFound
-      assemble = Assemble.find params[:id]
-    end
-    tmp_file = File.join((assemble || part).absolute_path, "downloads.zip")
-    File.delete(tmp_file) if File.exists?(tmp_file)
-    if part 
-      Zip::ZipFile.open(tmp_file, Zip::ZipFile::CREATE) do |zf|
-        zf.add(u_to_g(part.filename), u_to_g(part.absolute_filename))
-      end
-    elsif assemble
-      # a assemble depends on serval parts 
-      Zip::ZipFile.open(tmp_file, Zip::ZipFile::CREATE) do |zf|
-        zf.add(u_to_g(assemble.filename), u_to_g(assemble.absolute_filename))
-        assemble.parts.each do |part| 
-          zf.add(u_to_g(part.filename), u_to_g(part.absolute_filename))
-        end
-      end
-    end
-    send_file(tmp_file)
+    render :text => 'Send the archive of this paper'
   end
 
   def rebuild # update all the parameters and rebuild the paper
