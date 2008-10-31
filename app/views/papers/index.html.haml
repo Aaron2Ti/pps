@@ -1,7 +1,11 @@
-- for assemble in @assembles
-  = assemble.filename
-  = link_to 'Edit', edit_assemble_path(assemble)
-  = render :partial => 'list', :locals => {:items => assemble.parts}
-- @parts.each do |part|
-  = part.filename
-  = link_to 'Edit', edit_part_path(part)
+%ul
+  - @parts.each do |part|
+    %li
+      = part.filename
+      = link_to 'Edit', edit_paper_path(part)
+  %li
+    - for assemble in @assembles
+      = assemble.filename
+      = link_to 'Edit', edit_paper_path(assemble)
+      %ul= render :partial => 'list', :locals => {:items => assemble.parts}
+
