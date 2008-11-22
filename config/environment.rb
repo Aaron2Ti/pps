@@ -13,6 +13,9 @@ Rails::Initializer.run do |config|
     :secret      => 'fdd9127d4d6c0f74fcae71fb3657d4b1517d56b82197484ff4f3e945a0eb5'
   }
 
+  # use numeric prefix migration name conventions
+  config.active_record.timestamped_migrations = false
+
   config.gem 'zipruby', :version => '>= 0.2.9' 
   config.gem 'haml', :version => '>= 2.0.4'  
   config.gem 'rspec', :version => '>= 1.1.11', :lib => 'spec'  
