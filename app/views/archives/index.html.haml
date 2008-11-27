@@ -1,29 +1,4 @@
-%ul
-  图档列表:
-  = link_to 'New Archive', new_archive_path
-  - for archive in @archives
-    %li
-      %span= archive.desc
-      %span= archive.filename
-      %span= link_to 'Papers', archive_papers_path(archive)
-      %span= link_to 'Delete', archive_path(archive), :method => :delete
--#     = link_to paper_icon(archive), archive
--# <ul>
--# <% for archive in @archives %>
--#   <li>
--#     <%= link_to_remote archive.filename, :url => archive,
--#       :method => :get,
--#       :update => 'content',
--#       :loading  => "$('mask').show();",
--#       :complete => "$('mask').hide();"
--#     %>  
--#     <%= link_to_remote 'Delete', :url => archive_path(archive),
--#       :method => :delete,
--#       :confirm => '确认删除？',
--#       :update => 'content',
--#       :loading  => "$('mask').show();",
--#       :complete => "$('mask').hide();"
--#     %>  
--#   </li>
--# <% end %>
--# </ul>
+- @archives = (1..9).collect{|e| Archive.new(:desc => "/images/tmp/#{e}.png")}
+-#= render :partial => "item", :collection => @archives
+- @winners = @archives
+= render :partial => 'item', :collection => @archives

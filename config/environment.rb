@@ -1,6 +1,6 @@
 APP_ROOT = #'E:/workspace/pps'
 
-RAILS_GEM_VERSION = '2.2.1' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 
 require File.join(File.dirname(__FILE__), 'boot')
 
@@ -18,5 +18,6 @@ Rails::Initializer.run do |config|
 
   config.gem 'zipruby', :version => '>= 0.2.9' 
   config.gem 'haml', :version => '>= 2.0.4'  
-  config.gem 'rspec', :version => '>= 1.1.11', :lib => 'spec'  
+  # config.gem 'rspec', :version => '>= 1.1.11', :lib => 'spec'  
+  config.gem 'sqlite3-ruby', :lib => 'sqlite3'
 end

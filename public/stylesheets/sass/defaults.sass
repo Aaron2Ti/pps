@@ -1,0 +1,61 @@
+body
+  width: 980px
+  margin: 0 auto
+
+=border
+  border: 2px solid
+.head
+  +border
+  background: #eff
+  border-color: #cdd
+  h1
+  form
+    float: right
+.content
+  +border
+  background: #fef
+  border-color: #dcd
+  .menu
+    width: 150px
+    float: right
+    a
+      display: block
+  .recommend
+    width: 150px
+    float: left
+  .models-list
+    width: 680px
+    margin: 0 150px
+    div
+      float: left
+      width: 120px
+      border: 1px dotted
+      margin: 5px
+      img
+        width: 100px
+        height: 100px
+      img.operator
+        clear: right
+        float: right
+        width: 19px
+        height: 19px
+
+  .span-4
+    &:hover
+      background: #eee
+    div
+      a
+        display: block
+        float: right
+        width: 40px
+      img
+        &:hover
+          background: #ede
+  .cover
+    padding: 10px
+
+.foot
+  +border
+  text-align: right
+  background: #ffe
+  border-color: #ddc

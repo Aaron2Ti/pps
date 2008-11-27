@@ -5,7 +5,6 @@
 class ArchivesController < ApplicationController
   def index
     @archives = Archive.find :all
-    render :layout => false if request.xhr?
   end
   def new
     @archive = Archive.new

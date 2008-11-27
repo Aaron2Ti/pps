@@ -2,11 +2,29 @@
 %html
   %head 
     = javascript_tag "window._token = '#{form_authenticity_token}'"
-    = stylesheet_link_tag 'screen'
+    = stylesheet_link_tag 'screen', 'defaults'
     = stylesheet_link_tag 'print', :media => 'print'
     /[if IE] 
-      = stylesheet_link_tag 'ie'
+      -#= stylesheet_link_tag 'ie'
     %title Welcome to PPS
     %link{:rel => 'shortcut icon', :href => '/favicon.ico'}
-  %body{:class => 'container showgrid'}
-    = yield
+  %body{:class => 'showgrid'}
+    .head
+      %form
+        %input{:type => 'text', :style => 'background-color: #234; color: #eac'}
+        %input{:type => 'submit', :value => 'search'}
+      %h1 head
+    .content
+      .recommend Hello wrold
+      .menu
+        = link_to '上传新模型', new_archive_path
+        = link_to '查看所有模型', archives_path
+      .models-list
+        = yield
+        .clear
+      .clear
+    .foot
+      %a 关于
+      %a 帮助
+      %a 使用条款
+      %br &copy; 机械科学研究院总院
