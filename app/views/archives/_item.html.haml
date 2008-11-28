@@ -1,6 +1,6 @@
 %div
-  = link_to image_tag 'Part.ico', :class => 'operator'
-  = link_to image_tag 'Assemble.ico', :class => 'operator'
-  = link_to image_tag 'Sldworks.ico', :class => 'operator'
-  %img{:src => item.desc}
-  %span 这是一张什么...
+  = show_archive item
+  = edit_archive item
+  = del_archive item
+  = link_to image_tag(item.thumb), archive_path(item) 
+  %p= item.desc

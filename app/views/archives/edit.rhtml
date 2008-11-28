@@ -1,6 +1,0 @@
-<% form_for :archive, :url => archive_path(@archive), 
-  :html => {:method => :put} do |f| %>
-  <%= f.text_field :desc %>
-  <%= submit_tag 'Save' %>
-  <%= link_to 'back', archives_path %>
-<% end %>

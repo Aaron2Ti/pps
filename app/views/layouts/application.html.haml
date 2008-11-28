@@ -2,7 +2,7 @@
 %html
   %head 
     = javascript_tag "window._token = '#{form_authenticity_token}'"
-    = stylesheet_link_tag 'screen', 'defaults'
+    = stylesheet_link_tag 'reset', 'defaults'
     = stylesheet_link_tag 'print', :media => 'print'
     /[if IE] 
       -#= stylesheet_link_tag 'ie'
@@ -15,16 +15,19 @@
         %input{:type => 'submit', :value => 'search'}
       %h1 head
     .content
-      .recommend Hello wrold
+      .recommend 
+        %div{:style => 'background-color: #aed'}
+          Here will be sth represent the community functions
       .menu
         = link_to '上传新模型', new_archive_path
         = link_to '查看所有模型', archives_path
-      .models-list
+      .center
         = yield
-        .clear
-      .clear
+        = clear
+      = clear
     .foot
-      %a 关于
+      = link_to '关于', '/about.html'
       %a 帮助
       %a 使用条款
-      %br &copy; 机械科学研究院总院
+      %br
+      = link_to '&copy; 机械科学研究院总院'

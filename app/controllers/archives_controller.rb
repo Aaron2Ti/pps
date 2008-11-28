@@ -1,22 +1,18 @@
-# require 'encoding_filter'
-# require 'ftools'
-# require 'zip/zipfilesystem'
-
 class ArchivesController < ApplicationController
   def index
-    @archives = Archive.find :all
+    @archives = Archive.find :all, :limit => 10
   end
+
   def new
     @archive = Archive.new
-#     render :layout => false if request.xhr?
   end
+
   def show
-    flash[:archive_id] = params[:id]
-    redirect_to papers_path
+    @archive = Archive.find(params[:id])
   end
 
   def create
-    # people upload a zip archive which contains assembles and parts
+    # upload a zip archive which contains assembles and parts
     Archive.create(params[:archive])
     redirect_to archives_url
 #     if @archive.save
@@ -43,17 +39,21 @@ class ArchivesController < ApplicationController
 #       render :action => 'new'
 #     end
    end
+
   def destroy
     Archive.destroy(params[:id])
     redirect_to archives_url
   end
+
   def edit
     @archive = Archive.find(params[:id])
   end
+
   def update
     Archive.find(params[:id]).update_attributes(params[:archive])
     redirect_to archives_url
   end
+
   def download
     # zip the Assemble and its Parts
     archive = Archive.find(params[:id])

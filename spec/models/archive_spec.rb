@@ -3,7 +3,6 @@ require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 describe Archive do
   before(:each) do
     @archive = Archive.new
-
     @upload_file = flexmock('upload_file',
                             :original_filename => 'bucket.zip',
                             :content_type      => 'application/x-zip-compressed',
@@ -21,8 +20,7 @@ describe Archive do
   end
 
   it 'should accept zip formate file' do
-    @archive.valid?
-    @archive.errors[:base].should be_nil
+    @archive.should be_valid
   end
 
   it 'should not accept other file format to attach' do
@@ -34,6 +32,11 @@ describe Archive do
     @archive.should have(1).error_on :base
   end
 
+  it 'should have a random thumb from it\'s papers ' 
+
+  after :each do
+    @archive.destroy
+  end
 end
 
 

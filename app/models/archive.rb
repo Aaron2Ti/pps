@@ -6,8 +6,8 @@ class Archive < ActiveRecord::Base
   has_many :assembles
   has_many :parts
 
-  validate :validate_upload_file
-  after_save :write_file, :unzip, :generate_papers
+  validate_on_create :validate_upload_file
+  after_create :write_file, :unzip, :generate_papers
   after_destroy :delete_file
 
   #validates_as_attachment
@@ -75,5 +75,10 @@ class Archive < ActiveRecord::Base
 
   def delete_file
     FileUtils.rm_rf(full_path) if File.exist?(full_path)
+  end
+
+  def thumb
+    thumbs = papers.collect(&:thumb)
+    thumbs[rand(thumbs.size)]
   end
 end
