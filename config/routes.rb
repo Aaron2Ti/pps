@@ -1,11 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :archives, :shallow => true,
-    :member => {:download => :get} do |archive|
-    archive.resources :papers,
-      :member   => {:change => :get, :download => :get, :rebuild => :put},
-      :has_many => :parameters
-  end
+  map.resources :archives
+  map.resources :papers, :has_many => :parameters
+  map.resources :assembles, :has_many => :parameters, :controller => :papers
+
+  map.resources :parts, :has_many => :parameters, :shallow => true
 
   map.connect ':controller/:action/:id'
-  map.connect '', :controller => 'archives'
+  map.connect '', :controller => 'papers'
 end

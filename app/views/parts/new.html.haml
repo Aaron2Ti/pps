@@ -1,0 +1,7 @@
+上传新模型:
+- form_for @part, :html => {:multipart => true} do |f|
+  = f.label :desc, '名称'
+  = f.text_field :desc
+  = f.label :uploaded_data, '选择将要上传的模型'
+  = f.file_field :uploaded_data
+  = submit_tag 'Upload'

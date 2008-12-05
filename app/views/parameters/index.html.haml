@@ -1,0 +1,10 @@
+%h3
+  请配置模型
+  %strong= @part.filename
+  的参数
+
+= link_to '新参数', new_part_parameter_path(@part)
+%table
+  - @parameters.each do |p|
+    %tr
+      %td= link_to '新参数', new_parameter_path

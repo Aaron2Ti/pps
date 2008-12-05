@@ -6,6 +6,7 @@ class PapersController < ApplicationController
       :archive_id => params[:archive_id], 
       :assemble_id => nil 
     })
+    @papers = Paper.all
   end
   
   def show

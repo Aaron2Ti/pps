@@ -13,14 +13,14 @@
       %form
         %input{:type => 'text', :style => 'background-color: #234; color: #eac'}
         %input{:type => 'submit', :value => 'search'}
-      %h1 head
+      %div{:style => 'height: 100px'} head
     .content
       .recommend 
         %div{:style => 'background-color: #aed'}
           Here will be sth represent the community functions
       .menu
-        = link_to '上传新模型', new_archive_path
-        = link_to '查看所有模型', archives_path
+        = link_to '上传新模型', new_part_path
+        = link_to '所有模型', parts_path
       .center
         = yield
         = clear

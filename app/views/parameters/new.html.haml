@@ -1,0 +1,6 @@
+- form_for @parameter, :url => part_parameters_path(params[:part_id]) do |f|
+  %p= f.text_field :name
+  %p= f.text_field :desc
+  %p= f.text_field :default
+  = submit_tag '保存'
+= link_to '返回', part_parameters_path(params[:part_id])

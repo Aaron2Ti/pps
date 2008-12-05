@@ -6,7 +6,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
   config.frameworks -= [ :active_resource, :action_mailer ]
-  config.plugins = %w( haml )
+  config.plugins = %w( haml attachment_fu )
   
   config.action_controller.session = {
     :session_key => '_pps_session',
@@ -21,3 +21,6 @@ Rails::Initializer.run do |config|
   # config.gem 'rspec', :version => '>= 1.1.11', :lib => 'spec'  
   config.gem 'sqlite3-ruby', :lib => 'sqlite3'
 end
+
+# SolidWorks Part's MimeType is 'application/presentations' or 'image/x-presentations'
+Mime::Type.register 'application/presentations', :sldprt

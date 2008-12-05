@@ -1,14 +1,11 @@
 class ParametersController < ApplicationController
   def index
-    @parameters = Parameter.find(:all,
-                  :conditions => ["paper_id = ?", params[:paper_id]] )
-    @paper = Paper.find(params[:paper_id])
-    session[:paper] = @paper
-    render :layout => false
+    @part = Part.find(params[:part_id]) 
+    @parameters = @part.parameters
   end
+
   def new
-    @para = Parameter.new
-    render :layout => false if request.xhr?
+    @parameter = Parameter.new(:paper_id => params[:part_id])
   end
 
   def show
@@ -23,13 +20,15 @@ class ParametersController < ApplicationController
 
   def create
     @parameter = Parameter.new(params[:parameter])
-    @parameter.paper_id = params[:paper_id]
-    if @parameter.save
-      flash[:notice] = 'Parameter was successfully created.'
-      redirect_to parameters_url(params[:paper_id]) 
-    else
-      render :action => "new" 
-    end
+    @parameter.paper_id = params[:part_id]
+    @parameter.save!
+    redirect_to part_parameters_url(params[:part_id]) 
+#     if @parameter.save
+#       flash[:notice] = 'Parameter was successfully created.'
+#       redirect_to parameters_url(params[:paper_id]) 
+#     else
+#       render :action => "new" 
+#     end
   end
 
   def update
