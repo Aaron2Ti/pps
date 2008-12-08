@@ -1,4 +1,4 @@
-APP_ROOT = #'E:/workspace/pps'
+#APP_ROOT = 'E:/workspace/pps'
 
 RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 
@@ -22,5 +22,6 @@ Rails::Initializer.run do |config|
   config.gem 'sqlite3-ruby', :lib => 'sqlite3'
 end
 
+# ? 'application/octet-stream'
 # SolidWorks Part's MimeType is 'application/presentations' or 'image/x-presentations'
-Mime::Type.register 'application/presentations', :sldprt
+Mime::Type.register 'application/octet-stream', :sldprt

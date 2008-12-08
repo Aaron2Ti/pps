@@ -24,7 +24,13 @@ class PartsController < ApplicationController
 
   def show
     @part = Part.find(params[:id])
-  end
+    respond_to do |format|
+      format.html
+      format.sldprt {
+        send_file 'public' + @part.public_filename
+      }
+    end
+ end
 
   def destroy
     Part.destroy(params[:id])
