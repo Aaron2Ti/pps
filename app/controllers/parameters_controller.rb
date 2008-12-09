@@ -5,6 +5,7 @@ class ParametersController < ApplicationController
   end
 
   def new
+    @part = Part.find(params[:part_id]) 
     @parameter = Parameter.new(:paper_id => params[:part_id])
   end
 

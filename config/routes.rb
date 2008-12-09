@@ -6,5 +6,5 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :parts, :has_many => :parameters, :shallow => true
 
   map.connect ':controller/:action/:id'
-  map.connect '', :controller => 'papers'
+  map.root :controller => 'parts'
 end

@@ -5,17 +5,19 @@
     = stylesheet_link_tag 'reset', 'defaults'
     = stylesheet_link_tag 'print', :media => 'print'
     /[if IE] 
-      -#= stylesheet_link_tag 'ie'
-    %title Welcome to PPS
+      = stylesheet_link_tag 'ie'
+    %title &#402;&#32;&#8776;&#32;参数化3D模型共享平台
     %link{:rel => 'shortcut icon', :href => '/favicon.ico'}
   %body{:class => 'showgrid'}
     .head
-      %form
-        %input{:type => 'text', :style => 'background-color: #234; color: #eac'}
-        %input{:type => 'submit', :value => 'search'}
-      %div{:style => 'height: 100px'} head
+      %div
+        %h1 参数化3D模型共享平台
+        %form
+          %input{:type => 'text'}
+          %input{:type => 'submit', :value => 'S'}
     .content
       .recommend 
+        近期下载次数最多:
         %div{:style => 'background-color: #aed'}
           Here will be sth represent the community functions
       .menu
@@ -27,7 +29,7 @@
       = clear
     .foot
       = link_to '关于', '/about.html'
-      %a 帮助
-      %a 使用条款
+      = link_to '帮助', '/help.html'
+      = link_to '使用条款', '/license.html'
       %br
-      = link_to '&copy; 机械科学研究院总院'
+      = link_to '&copy;&#32;机械科学研究院总院', 'http://www.cam.com.cn/'

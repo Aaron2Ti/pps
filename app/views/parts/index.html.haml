@@ -1,8 +1,7 @@
-所有模块
-%table
-  - @parts.each do |part|
-    %tr
-      %td= part.desc 
-      %td= link_to '查看', part_path(part)
-      %td= link_to '编辑', edit_part_path(part)
-      %td= link_to '删除', part_path(part), :method => :delete
+- @parts.each do |part|
+  %div
+    = link_to((image_tag('Part.ico', :class => 'operator')), part_path(part))
+    = link_to '编辑', edit_part_path(part)
+    = link_to '删除', part_path(part), :method => :delete
+    = image_tag part.jpg
+    %p= part.desc

@@ -9,7 +9,7 @@ class PartsController < ApplicationController
   
   def create
     @part = Part.create!(params[:part])
-    redirect_to part_path(@part) 
+    redirect_to parts_path
   end
 
   def edit

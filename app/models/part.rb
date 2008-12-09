@@ -18,5 +18,22 @@ class Part < Paper
 
   has_many :parameters, :foreign_key => 'paper_id', :dependent => :destroy
 
+  def wrl
+    '/Cylinder.wrl'
+  end
+
+  def jpg
+    '/Cylinder.jpg'
+  end
+
+  def preview(ext = :jpg)
+    case ext
+    when :jpg
+      '/Cylinder.jpg'
+    when :vrml
+      '/Cylinder.wrl'
+    end
+  end
+
 #   include ModelDoc
 end
