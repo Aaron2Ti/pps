@@ -1,0 +1,74 @@
+@import arithmetic
+
+div.center > form
+  margin: 20px auto
+  width: 90%
+  .field  
+    margin: 10px 15% 10px 5%
+    text-align: right
+    label
+      padding-right: 2px
+    input[type='text'], input[type='file'] 
+      width: 80%
+  .submit
+    margin: 10px 10%
+    text-align: right
+     
+   
+//   span
+//     width: 200px
+//   input[type='text']
+//     width: 300px
+//     margin-right: 10%
+//   input[type='file']
+//     width: 306px
+//     margin-right: 10%
+div.paper 
+  cursor: pointer
+  margin: 0 auto
+  height: 140px
+  width: 140px
+  border: 5px solid 
+  position: relative
+  overflow: hidden
+  border-color = !bd_c
+  img
+    width: 140px
+    height: 140px
+    margin: 0 auto
+    opacity: 0.8
+    filter: alpha(opacity = 80)
+    z-index: -1
+  p
+    position: absolute
+    bottom: -40px
+    left: 0
+    z-index: 1
+    padding: 5px
+    width: 140px
+    margin: 0 auto
+    background: #b4b8c3
+    color: #ee5011 
+  a 
+    display: block
+    position: absolute
+    text-indent: -9999px
+    width: 32px
+    height: 32px
+    right: 2px
+    z-index: 2
+  a.show
+    top: 4px
+    background: url(/images/edit.png) no-repeat bottom left
+    &:hover
+      background: url(/images/edit.png) no-repeat top left
+  a.edit
+    top: 44px
+    background: url(/images/edit.png) no-repeat bottom center
+    &:hover
+      background: url(/images/edit.png) no-repeat top center
+  a.delete
+    top: 84px
+    background: url(/images/edit.png) no-repeat bottom right
+    &:hover
+      background: url(/images/edit.png) no-repeat top right

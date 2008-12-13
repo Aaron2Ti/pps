@@ -2,30 +2,39 @@
 %html
   %head 
     = javascript_tag "window._token = '#{form_authenticity_token}'"
+    -#= javascript_include_tag 'mootools-1.2.1-core-yc', 'moo'
+    = javascript_include_tag 'jquery-1.2.6.min', 'jquery.color', 'jq'
     = stylesheet_link_tag 'reset', 'defaults'
     = stylesheet_link_tag 'print', :media => 'print'
     /[if IE] 
-      = stylesheet_link_tag 'ie'
-    %title &#402;&#32;&#8776;&#32;参数化3D模型共享平台
+      -#= stylesheet_link_tag 'ie'
     %link{:rel => 'shortcut icon', :href => '/favicon.ico'}
-  %body{:class => 'showgrid'}
+    %title= "#{@title}&#402;&#32;&#8776;&#32;参数化3D模型共享平台"
+    = yield :head
+  %body
     .head
       %div
         %h1 参数化3D模型共享平台
-        %form
-          %input{:type => 'text'}
-          %input{:type => 'submit', :value => 'S'}
-    .content
+        %form.search
+          %a{:href => '#'} 搜索
+          %input{:type => 'text', :value => 'Searching...' } 
+    .body
       .recommend 
-        近期下载次数最多:
-        %div{:style => 'background-color: #aed'}
-          Here will be sth represent the community functions
+        %p
+          本周下载次数最多:
+        %div.paper
+          = image_tag @recommend_part.jpg
+          %p= @recommend_part.desc
+        %img{:src => '/images/left.jpg', :style => 'margin-top: 20px'}
       .menu
-        = link_to '上传新模型', new_part_path
-        = link_to '所有模型', parts_path
+        = link_to '所有模块', parts_path
+        = link_to '上传新模块', new_part_path
+        = link_to '功能1', '#'
+        = link_to '功能2', '#'
+        = link_to '功能3', '#'
+        = link_to '功能4', '#'
       .center
         = yield
-        = clear
       = clear
     .foot
       = link_to '关于', '/about.html'

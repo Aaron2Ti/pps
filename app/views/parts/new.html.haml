@@ -1,10 +1,14 @@
-上传新模型:
+- @title = '上传新图纸 < '
+- content_for(:head) do
+  = stylesheet_link_tag 'paper'
+
 - form_for @part, :html => {:multipart => true} do |f|
-  %p
+  .field
     = f.label :desc, '名称'
     = f.text_field :desc
-  %p
-    = f.label :uploaded_data, '选择将要上传的模型'
+  .field
+    = f.label :uploaded_data, '选择图纸'
     = f.file_field :uploaded_data
-  = submit_tag '上传'
-  = link_to '返回', :back
+  .submit
+    = submit_tag '上传'
+    = link_to '返回', :back

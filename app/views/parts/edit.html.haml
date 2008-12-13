@@ -1,4 +1,9 @@
+- content_for :head do
+  = stylesheet_link_tag 'paper'
+
 - form_for @part do |f|
-  = f.label :desc, '名称'
-  = f.text_field :desc
-  = submit_tag '保存'
+  .field
+    = f.label :desc, '名称'
+    = f.text_field :desc
+  .submit
+    = submit_tag '保存'

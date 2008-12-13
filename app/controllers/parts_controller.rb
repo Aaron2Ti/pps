@@ -1,6 +1,6 @@
 class PartsController < ApplicationController
   def index
-    @parts = Part.all
+    @parts = Part.all(:limit => 8)
   end
 
   def new
@@ -30,7 +30,7 @@ class PartsController < ApplicationController
         send_file 'public' + @part.public_filename
       }
     end
- end
+  end
 
   def destroy
     Part.destroy(params[:id])
