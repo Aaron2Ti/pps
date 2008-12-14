@@ -1,6 +1,6 @@
 class ParametersController < ApplicationController
   def index
-    @part = Part.find(params[:part_id]) 
+    @part = Part.find(params[:part_id], :include => [:parameters]) 
     @parameters = @part.parameters
   end
 
@@ -24,12 +24,6 @@ class ParametersController < ApplicationController
     @parameter.paper_id = params[:part_id]
     @parameter.save!
     redirect_to part_parameters_url(params[:part_id]) 
-#     if @parameter.save
-#       flash[:notice] = 'Parameter was successfully created.'
-#       redirect_to parameters_url(params[:paper_id]) 
-#     else
-#       render :action => "new" 
-#     end
   end
 
   def update

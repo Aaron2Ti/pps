@@ -1,11 +1,5 @@
 - content_for :head do
   = stylesheet_link_tag 'paper'
-- content_for :recommend do
-  %p
-    本周下载次数最多:
-  %div.paper
-    = image_tag @recommend_part.jpg
-    %p= @recommend_part.desc
 
 %p 最近上传的8张图
 - @parts.each do |part|

@@ -17,8 +17,8 @@ Rails::Initializer.run do |config|
   # use numeric prefix migration name conventions
   config.active_record.timestamped_migrations = false
 
-  config.gem 'zipruby', :version => '>= 0.2.9' 
   config.gem 'haml', :version => '>= 2.0.4'  
+  # config.gem 'zipruby', :version => '>= 0.2.9' 
   # config.gem 'rspec', :version => '>= 1.1.11', :lib => 'spec'  
   config.gem 'sqlite3-ruby', :lib => 'sqlite3'
 end

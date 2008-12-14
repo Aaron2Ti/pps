@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 5) do
+ActiveRecord::Schema.define(:version => 8) do
 
   create_table "archives", :force => true do |t|
     t.string  "desc"
@@ -24,16 +24,18 @@ ActiveRecord::Schema.define(:version => 5) do
     t.string  "filename"
     t.string  "desc"
     t.string  "type"
-    t.string  "thumb"
     t.integer "size"
     t.string  "content_type"
+    t.string  "thumb"
+    t.boolean "available",    :default => false
   end
 
   create_table "parameters", :force => true do |t|
     t.integer "paper_id"
     t.string  "name"
     t.string  "desc"
-    t.float   "default",  :default => 10.0
+    t.float   "value",    :default => 10.0
+    t.string  "def"
   end
 
 end

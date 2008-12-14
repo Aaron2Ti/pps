@@ -1,7 +1,17 @@
+- content_for(:head) do
+  = stylesheet_link_tag 'paper'
+
 - form_for [@part, @parameter] do |f|
-  %p= f.text_field :name
-  %p= f.text_field :desc
-  %p= f.text_field :default
-  = submit_tag '保存'
-= link_to '返回', :back
+  .field
+    = f.label :name, '名称'
+    = f.text_field :name
+  .field
+    = f.label :desc, '定义'
+    = f.text_field :def
+  .field
+    = f.label :value, '默认值'
+    = f.text_field :value
+  .submit
+    = submit_tag '保存'
+    = link_to '返回', :back
 -#= link_to '返回', [@part, :parameters]

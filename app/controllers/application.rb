@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :recommend_part
   def recommend_part
-    @recommend_part = Part.recommend
+    @recommend_part ||= Part.recommend
   end
   # See ActionController::RequestForgeryProtection for details
   # Uncomment the :secret if you're not using the cookie session store

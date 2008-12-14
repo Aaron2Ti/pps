@@ -11,3 +11,5 @@ log/*
 tmp/*
 test
 defaults.css
+*.SLDPRT
+*.sldprt

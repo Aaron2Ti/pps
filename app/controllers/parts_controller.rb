@@ -1,6 +1,6 @@
 class PartsController < ApplicationController
   def index
-    @parts = Part.all(:limit => 8)
+    @parts = Part.all#(:limit => 8)
   end
 
   def new
@@ -19,7 +19,7 @@ class PartsController < ApplicationController
   def update
     @part = Part.find(params[:id])
     @part.update_attributes!(params[:part])
-    redirect_to part_path(@part) 
+    redirect_to parts_path
   end
 
   def show
