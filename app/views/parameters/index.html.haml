@@ -1,9 +1,14 @@
 %h3
   请配置模型
-  %strong= @part.filename
+  %strong=link_to @part.desc, part_path(@part)
   的参数
-
-= link_to '新参数', new_part_parameter_path(@part)
 %table
+  %tr
+    %td 名称
+    %td 初始值(mm)
+    %td= link_to '新参数', new_part_parameter_path(@part)
   - @parameters.each do |p|
-    = p.desc
+    %tr
+      %td= link_to p.name, edit_parameter_path(p) 
+      %td= p.value
+      %td= link_to '删除', parameter_path(p), :method => :delete

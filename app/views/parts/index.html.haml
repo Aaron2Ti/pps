@@ -1,7 +1,7 @@
 - content_for :head do
   = stylesheet_link_tag 'paper'
 
-%p 最近上传的8张图
+%p 最近上传的模块
 - @parts.each do |part|
   %div.paper  
     = image_tag part.jpg

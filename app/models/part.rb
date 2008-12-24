@@ -70,4 +70,13 @@ class Part < Paper
     logger.info "Add a new job: preprocess_part => #{id}"
     logger.info '#' * 40 + "\n"
   end
+
+  def change(params = {})
+    params.merge!('id' => id)
+    JobsQueue.instance.add('change_part', params)
+    logger.info '#' * 40
+    logger.info Time.now.strftime 'Time: %m/%d/%y - %I:%M:%S %p'
+    logger.info "Add a new job: change_part => #{id}"
+    logger.info '#' * 40 + "\n"
+  end
 end

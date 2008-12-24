@@ -2,8 +2,19 @@
   = stylesheet_link_tag 'paper'
 
 = vrml(@part.wrl)
-%br
-= @part.desc
-= link_to '编辑', edit_part_path(@part)
-= link_to '删除', part_path(@part), :method => :delete
-= link_to '返回', parts_path
+.desc
+  = link_to @part.desc, edit_part_path(@part)
+  = link_to '参数列表', part_parameters_path(@part)
+  = link_to '返回', parts_path
+  - form_tag change_part_path(@part), :method => :put  do
+    - @part.parameters.each do |p|
+      .field
+        = label_tag "parameters[#{p.id}]", p.name
+        = text_field_tag "parameters[#{p.id}]", "#{p.value}"
+    .submit
+      = submit_tag '保存'
+      = link_to '返回', :back
+-#     .field
+-#       = f.label :desc, '定义'
+-#       = f.text_field :def
+-#       = label for=<%= "parameters[#{p.id}]" %> <%= p.desc+': ' %></label>

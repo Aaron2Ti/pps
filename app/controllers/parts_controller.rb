@@ -26,14 +26,20 @@ class PartsController < ApplicationController
     @part = Part.find(params[:id])
     respond_to do |format|
       format.html
-      format.sldprt {
-        send_file 'public' + @part.public_filename
-      }
+#       format.sldprt {
+#         send_file 'public' + @part.public_filename
+#       }
     end
   end
 
   def destroy
     Part.destroy(params[:id])
     redirect_to parts_path
+  end
+
+  def change
+    @part = Part.find(params[:id])
+    @part.change(params[:parameters]) if params[:parameters].size > 0
+    redirect_to part_url(@part)
   end
 end

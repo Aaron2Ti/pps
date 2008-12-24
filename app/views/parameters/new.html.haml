@@ -1,5 +1,5 @@
 - content_for(:head) do
-  = stylesheet_link_tag 'paper'
+  = stylesheet_link_tag 'form'
 
 - form_for [@part, @parameter] do |f|
   .field
@@ -14,4 +14,3 @@
   .submit
     = submit_tag '保存'
     = link_to '返回', :back
--#= link_to '返回', [@part, :parameters]
