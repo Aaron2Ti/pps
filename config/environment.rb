@@ -7,7 +7,7 @@ require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
   config.frameworks -= [ :active_resource, :action_mailer ]
-  config.plugins = %w( haml attachment_fu )
+  config.plugins = %w( haml )
   
   config.action_controller.session = {
     :session_key => '_pps_session',
@@ -17,12 +17,12 @@ Rails::Initializer.run do |config|
   # use numeric prefix migration name conventions
   config.active_record.timestamped_migrations = false
 
-  config.gem 'haml', :version => '>= 2.0.4'  
+  config.gem 'haml',         :version => '>= 2.0.4'
+  config.gem 'sqlite3-ruby', :lib => 'sqlite3'
   # config.gem 'rmagick'#, :version => '>= 2.7.0'
 
   # config.gem 'zipruby', :version => '>= 0.2.9' 
   # config.gem 'rspec', :version => '>= 1.1.11', :lib => 'spec'  
-  config.gem 'sqlite3-ruby', :lib => 'sqlite3'
 end
 
 # ? 'application/octet-stream'

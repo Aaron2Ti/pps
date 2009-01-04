@@ -1,17 +1,12 @@
 require 'ftools'
 
 class Part < Paper
-  # SolidWorks Part's MimeType is 'application/presentations' or 'image/x-presentations'
-  # 'application/octet-stream' 
-  #   attr_accessible :desc
-  #   has_attachment :storage => :file_system,
-  #                  :content_type => 'application/octet-stream' 
-  #   validates_as_attachment
-  #   belongs_to :archive  
-  #   belongs_to :assemble  
+  has_many :taggings, :as => :taggable, :dependent => :delete_all
+  has_many :tags, :through => :taggings
+
   has_many :parameters, :foreign_key => 'paper_id', :dependent => :destroy
 
-  after_create :write_file, :preprocess #, :unzip, :generate_papers
+  after_create :write_file, :preprocess 
   after_destroy :delete_file
 
   validates_format_of :filename, :with => /^.+\.SLDPRT$/i, :on => :create, 
@@ -19,6 +14,39 @@ class Part < Paper
   validates_inclusion_of :size, :in => 1.kilobyte..5.megabytes, :on => :create,
     :message => 'Only Accept File Size Between 1KB and 5MB'
   validates_presence_of :desc
+
+  def find_by_tags(tag_names)
+    # TODO
+    # 'aaa bbb ccc'
+    # cache the results
+  end
+
+  def tag_list
+    reload(:select => :id)
+    self.tags.collect(&:name)
+  end
+
+  def tag_summary
+    tag_list.sort.join(', ')
+  end
+
+  def tag_summary=(tag_names)
+    self.taggings = []
+    Tag.sanitize_name(tag_names).each do |e|
+      self.tags << Tag.find_or_create_by_name(e) 
+    end
+  end
+
+  def add_tags(tag_names)
+    Tag.sanitize_name(tag_names).each do |e|
+      self.tags << Tag.find_or_create_by_name(e) unless tag_list.include?(e) 
+    end
+  end
+
+  def remove_tag(tag_id)
+    tagging = taggings.find_by_tag_id(tag_id)
+    tagging.delete if tagging
+  end
 
   def upload_file=(file)
     unless file.blank?
@@ -60,7 +88,12 @@ class Part < Paper
   end
 
   def jpgs
-
+    %W(
+      /papers/part_#{id}/top.jpg
+      /papers/part_#{id}/front.jpg
+      /papers/part_#{id}/left.jpg
+      /papers/part_#{id}/isometric.jpg
+    )
   end
 
   def preprocess
