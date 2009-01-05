@@ -12,22 +12,17 @@ ActiveRecord::Base.establish_connection(
 loop do
   id = JobsQueue.instance.get('mk_thumb')
   part = Part.find(id)
-  img_file = File.join(File.dirname(__FILE__), '..', 'public', 
-                       File.dirname(part.jpg), 'isometric.jpg') 
-
-
-  img = Magick::Image.read(img_file).first
-  w, h = img.columns, img.rows
-  l, t, half = 0, 0, (w - h).abs / 2
-  if w > h then l, s = half, h else  t, s = half, w end
-  img.crop(l, t, s, s).scale(140, 140).write(File.join(File.dirname(img_file), 'preview.jpg'))
-
-#   ImageScience.with_image(img_file) do |img|
-#     img.cropped_thumbnail(140) do |thumb|
-#       thumb.save img_file
-#     end
-#   end
-
+  part.gen_thumbnail
   sleep 1 
+#  img_file = File.join(File.dirname(__FILE__), '..', 'public', 
+#                       File.dirname(part.jpg), 'isometric.jpg') 
+
+
+#  img = Magick::Image.read(img_file).first
+#  w, h = img.columns, img.rows
+#  l, t, half = 0, 0, (w - h).abs / 2
+#  if w > h then l, s = half, h else  t, s = half, w end
+#  img.crop(l, t, s, s).scale(140, 140).write(File.join(File.dirname(img_file), 'preview.jpg'))
+
 end
 

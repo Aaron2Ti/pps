@@ -1,4 +1,5 @@
 require 'ftools'
+require 'mini_magick' 
 
 class Part < Paper
   has_many :taggings, :as => :taggable, :dependent => :delete_all
@@ -94,6 +95,22 @@ class Part < Paper
       /papers/part_#{id}/left.jpg
       /papers/part_#{id}/isometric.jpg
     )
+  end
+
+  def gen_thumbnail
+    img_file = File.join( 'public', 
+                          File.dirname(self.jpg),
+                          'isometric.jpg' ) 
+
+    img = MiniMagick::Image.from_file(img_file)
+
+    w, h = img[:width], img[:height]
+    l, t, half = 0, 0, (w - h).abs / 2
+    if w > h then l, s = half, h else  t, s = half, w end
+
+    thumbnail = File.join(File.dirname(img_file), 'preview.jpg') 
+
+    img.crop("#{s}x#{s}+#{l}+#{t}").scale(140).write(thumbnail)
   end
 
   def preprocess
