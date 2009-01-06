@@ -1,5 +1,5 @@
 require 'ftools'
-require 'mini_magick' 
+require 'mini_magick'
 
 class Part < Paper
   has_many :taggings, :as => :taggable, :dependent => :delete_all
@@ -7,17 +7,17 @@ class Part < Paper
 
   has_many :parameters, :foreign_key => 'paper_id', :dependent => :destroy
 
-  after_create :write_file, :preprocess 
+  after_create :write_file, :preprocess
   after_destroy :delete_file
 
-  validates_format_of :filename, :with => /^.+\.SLDPRT$/i, :on => :create, 
+  validates_format_of :filename, :with => /^.+\.SLDPRT$/i, :on => :create,
     :message => 'Only Accept SolidWork\'s Part Drawing Currently'
   validates_inclusion_of :size, :in => 1.kilobyte..5.megabytes, :on => :create,
     :message => 'Only Accept File Size Between 1KB and 5MB'
   validates_presence_of :desc
 
+  # TODO Part.find_by_tags
   def find_by_tags(tag_names)
-    # TODO
     # 'aaa bbb ccc'
     # cache the results
   end
@@ -34,13 +34,13 @@ class Part < Paper
   def tag_summary=(tag_names)
     self.taggings = []
     Tag.sanitize_name(tag_names).each do |e|
-      self.tags << Tag.find_or_create_by_name(e) 
+      self.tags << Tag.find_or_create_by_name(e)
     end
   end
 
   def add_tags(tag_names)
     Tag.sanitize_name(tag_names).each do |e|
-      self.tags << Tag.find_or_create_by_name(e) unless tag_list.include?(e) 
+      self.tags << Tag.find_or_create_by_name(e) unless tag_list.include?(e)
     end
   end
 
@@ -51,7 +51,7 @@ class Part < Paper
 
   def upload_file=(file)
     unless file.blank?
-      @upload_file      = file 
+      @upload_file      = file
       self.filename     = @upload_file.original_filename
       self.content_type = @upload_file.content_type
       self.size         = @upload_file.size
@@ -66,7 +66,7 @@ class Part < Paper
     if @upload_file
       File.makedirs(path)
       File.open(file_path, 'wb') do |f|
-        f.write(@upload_file.read) 
+        f.write(@upload_file.read)
       end
     end
   end
@@ -77,7 +77,7 @@ class Part < Paper
   end
 
   def self.recommend
-    first 
+    first
   end
 
   def wrl
@@ -90,17 +90,17 @@ class Part < Paper
 
   def jpgs
     %W(
+      /papers/part_#{id}/isometric.jpg
       /papers/part_#{id}/top.jpg
       /papers/part_#{id}/front.jpg
       /papers/part_#{id}/left.jpg
-      /papers/part_#{id}/isometric.jpg
     )
   end
 
   def gen_thumbnail
-    img_file = File.join( 'public', 
+    img_file = File.join( 'public',
                           File.dirname(self.jpg),
-                          'isometric.jpg' ) 
+                          'isometric.jpg' )
 
     img = MiniMagick::Image.from_file(img_file)
 
@@ -108,17 +108,24 @@ class Part < Paper
     l, t, half = 0, 0, (w - h).abs / 2
     if w > h then l, s = half, h else  t, s = half, w end
 
-    thumbnail = File.join(File.dirname(img_file), 'preview.jpg') 
+    thumbnail = File.join(File.dirname(img_file), 'preview.jpg')
 
     img.crop("#{s}x#{s}+#{l}+#{t}").scale(140).write(thumbnail)
   end
 
   def preprocess
-    JobsQueue.instance.add('preprocess_part', id)
+    # Marchal and Inflate the part
+    part = Marshal.dump({ :id => self.id,
+                          :filename => self.filename })
+    JobsQueue.instance.add('preprocess_part', part)
+#                              :filename => Iconv.conv('gbk', 'utf-8', self.filename)
+#  part.filename = Iconv.conv('gbk', 'utf-8', part.filename)
+#  drawing = File.join(APP_ROOT, part.path, part.filename)
     logger.info '#' * 40
     logger.info Time.now.strftime 'Time: %m/%d/%y - %I:%M:%S %p'
-    logger.info "Add a new job: preprocess_part => #{id}"
+    logger.info "Add a new job: preprocess_part => #{part[:id]}"
     logger.info '#' * 40 + "\n"
+    return nil
   end
 
   def change(params = {})

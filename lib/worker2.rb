@@ -1,5 +1,4 @@
 require 'rubygems'
-require 'RMagick'
 require 'active_record'
 require "#{File.dirname(__FILE__)}/jobs_queue"
 require "#{File.dirname(__FILE__)}/../app/models/paper"
@@ -7,15 +6,16 @@ require "#{File.dirname(__FILE__)}/../app/models/part"
 
 ActiveRecord::Base.establish_connection(
   YAML.load_file("#{File.dirname(__FILE__)}/../config/database.yml")['development']
-)  
+)
 
 loop do
   id = JobsQueue.instance.get('mk_thumb')
   part = Part.find(id)
+  part.update_attribute(:available, true)
   part.gen_thumbnail
-  sleep 1 
-#  img_file = File.join(File.dirname(__FILE__), '..', 'public', 
-#                       File.dirname(part.jpg), 'isometric.jpg') 
+  sleep 1
+#  img_file = File.join(File.dirname(__FILE__), '..', 'public',
+#                       File.dirname(part.jpg), 'isometric.jpg')
 
 
 #  img = Magick::Image.read(img_file).first

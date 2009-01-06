@@ -9,7 +9,7 @@ require "#{File.dirname(__FILE__)}/../app/models/parameter"
 
 ActiveRecord::Base.establish_connection(
   YAML.load_file("#{File.dirname(__FILE__)}/../config/database.yml")['development']
-)  
+)
 
 APP_ROOT = '//192.168.6.88/aaron/workspace/pps'
 loop do
@@ -36,8 +36,8 @@ loop do
   doc.ViewZoomtofit2
   doc.SaveAs3("#{img_dir}/3d.wrl", 0, 0)
 
-  sldworks.CloseDoc File.basename(part.filename) 
+  sldworks.CloseDoc File.basename(part.filename)
 
-  sleep 1 
+  sleep 1
 end
 
