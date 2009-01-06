@@ -1,13 +1,15 @@
-!!! 1.1 
+!!! 1.1
 %html
-  %head 
+  %head
+    = stylesheet_link_tag 'reset', 'defaults', 'lightbox/lightbox'
+    /[if IE]
+      = stylesheet_link_tag 'ie'
+    = stylesheet_link_tag 'print', :media => 'print'
+
     = javascript_tag "window._token = '#{form_authenticity_token}'"
     -#= javascript_include_tag 'mootools-1.2.1-core-yc', 'moo'
-    = javascript_include_tag 'jquery-1.2.6.min', 'jquery.color', 'jq'
-    = stylesheet_link_tag 'reset', 'defaults'
-    = stylesheet_link_tag 'print', :media => 'print'
-    /[if IE] 
-      -#= stylesheet_link_tag 'ie'
+    = javascript_include_tag 'jquery-1.2.6.min', 'jquery.color', 'jquery.lightbox', 'jq'
+
     %link{:rel => 'shortcut icon', :href => '/favicon.ico'}
     %title= "#{@title}&#402;&#32;&#8776;&#32;参数化3D模型共享平台"
     = yield :head
@@ -17,14 +19,17 @@
         %h1 参数化3D模型共享平台
         %form.search
           %a{:href => '#'} 搜索
-          %input{:type => 'text', :value => 'Searching...' } 
+          %input{:type => 'text', :value => 'Searching...' }
     .body
-      .recommend 
-        %p
-          本周下载次数最多:
-        %div.paper
+      .recommend
+        -#%a.lightbox{:herf => @recommend_part.jpg, :ref => 'Part', :title => 'Hello world'} Hello
+        本周下载次数最多:
+        .paper
           = image_tag @recommend_part.jpg
           %p= @recommend_part.desc
+          - @recommend_part.jpgs.each do |jpg|
+            %a.lightbox{:href => jpg, :rel => @recommend_part }
+
         %img{:src => '/images/left.jpg', :style => 'margin-top: 20px'}
       .menu
         = link_to '所有模块', parts_path

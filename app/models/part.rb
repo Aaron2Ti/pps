@@ -72,8 +72,8 @@ class Part < Paper
   end
 
   def delete_file
-    FileUtils.rm_rf(path) if File.exist?(path)
-    FileUtils.rm_rf File.join( 'public', File.dirname(wrl) )
+    FileUtils.rm_r(path) if File.exist?(path)
+    FileUtils.rm_r File.join( 'public', "papers/part_#{id}" )
   end
 
   def self.recommend
@@ -98,9 +98,7 @@ class Part < Paper
   end
 
   def gen_thumbnail
-    img_file = File.join( 'public',
-                          File.dirname(self.jpg),
-                          'isometric.jpg' )
+    img_file = File.join( 'public', "papers/part_#{id}", 'isometric.jpg' )
 
     img = MiniMagick::Image.from_file(img_file)
 
@@ -115,25 +113,20 @@ class Part < Paper
 
   def preprocess
     # Marchal and Inflate the part
-    part = Marshal.dump({ :id => self.id,
-                          :filename => self.filename })
-    JobsQueue.instance.add('preprocess_part', part)
-#                              :filename => Iconv.conv('gbk', 'utf-8', self.filename)
-#  part.filename = Iconv.conv('gbk', 'utf-8', part.filename)
-#  drawing = File.join(APP_ROOT, part.path, part.filename)
-    logger.info '#' * 40
-    logger.info Time.now.strftime 'Time: %m/%d/%y - %I:%M:%S %p'
-    logger.info "Add a new job: preprocess_part => #{part[:id]}"
-    logger.info '#' * 40 + "\n"
-    return nil
+    part = Marshal.dump({ :id => id,
+                          :filename => filename ,
+                          :process_type => 'preprocess' })
+    JobsQueue.instance.add('process_drawing', part)
   end
 
   def change(params = {})
-    params.merge!('id' => id)
-    JobsQueue.instance.add('change_part', params)
-    logger.info '#' * 40
-    logger.info Time.now.strftime 'Time: %m/%d/%y - %I:%M:%S %p'
-    logger.info "Add a new job: change_part => #{id}"
-    logger.info '#' * 40 + "\n"
+    params = params.collect do |k, v|
+      [Parameter.find(k).def, v.to_f]
+    end
+    part = Marshal.dump({ :id => id,
+                          :filename => filename,
+                          :params => params.to_a,
+                          :process_type => 'change' })
+    JobsQueue.instance.add('process_drawing', part)
   end
 end

@@ -3,9 +3,11 @@
 
 %p 最近上传的模块
 - @parts.each do |part|
-  %div.paper  
+  %div.paper
     = image_tag part.jpg
     = link_to '查看', part_path(part), :class => 'show'
     = link_to '编辑', edit_part_path(part), :class => 'edit'
     = link_to '删除', part_path(part), :method => :delete, :class => 'delete'
     %p= part.desc
+    - part.jpgs.each do |jpg|
+      %a.lightbox{:href => jpg, :rel => part }

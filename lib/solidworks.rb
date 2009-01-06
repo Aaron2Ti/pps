@@ -1,5 +1,6 @@
 # Do some view modify in linux disable 'win32ole'
 # require 'win32ole'
+# TODO Examine Memory Leak of the OLE library
 require 'ftools'
 require 'encoding_filter'
 
