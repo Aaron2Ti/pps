@@ -15,3 +15,7 @@ defaults.css
 *.SLDPRT
 *.sldprt
 Thumbs.db
+arithmetic.css
+form.css
+paper.css
+
