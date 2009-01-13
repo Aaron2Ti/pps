@@ -6,7 +6,7 @@ class PartsController < ApplicationController
   def new
     @part = Part.new
   end
-  
+
   def create
     @part = Part.create!(params[:part])
     redirect_to parts_path
@@ -19,17 +19,11 @@ class PartsController < ApplicationController
   def update
     @part = Part.find(params[:id])
     @part.update_attributes!(params[:part])
-    redirect_to parts_path
+    render :nothing => true
   end
 
   def show
     @part = Part.find(params[:id])
-    respond_to do |format|
-      format.html
-#       format.sldprt {
-#         send_file 'public' + @part.public_filename
-#       }
-    end
   end
 
   def destroy
