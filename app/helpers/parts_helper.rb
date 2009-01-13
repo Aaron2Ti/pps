@@ -1,12 +1,13 @@
 module PartsHelper
   def vrml(src)
     tag :embed,
-      { :src => src,
-        :type => 'model/vrml',
-        :width => 400, 
-        :height => 400,
-        :consolemode => 1, 
-        :skin => '{46BB95BF-8EB4-481A-A1EF-50D43FC32B9D}' }
+      { :src         => src,
+        :width       => 400,
+        :height      => 400,
+        :type        => 'model/vrml',
+        :ConsoleMode => 0,
+        :ContextMenu => false,
+        :skin        => '{46BB95BF-8EB4-481A-A1EF-50D43FC32B9D}' }
   end
 
   def link_to_show(part)

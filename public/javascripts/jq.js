@@ -3,7 +3,7 @@ $(function(){
   var bd_c = '#3a3a2f';        // border's color
   var bd_h_c = '#ffb57d'       // border's color on mouse hover
   $('div.paper').hover(
-    function(){ 
+    function(){
       $(this).animate({ borderColor: bd_h_c });
       $(this).children('img').animate({ opacity: 1 });
       $(this).children('p').animate({ bottom: 0 });
@@ -17,16 +17,16 @@ $(function(){
 
 //++++++++++++++Add Lightbox++++++++++++++++++++++
 // TODO Lightbox for Part previews should only have 4 images
-  $('.lightbox').lightbox();     
   $('div.paper > p').click(
     function(){
       $(this).next('a.lightbox').trigger('click');
     }
   );
+  $('.lightbox').lightbox();
 //++++++++++++++Add Lightbox END++++++++++++++++++++++
 
   $('div.menu > a').hover(
-      function(){ 
+      function(){
         $(this).animate({
           color: '#aeafed',
           borderLeftColor: bd_h_c,

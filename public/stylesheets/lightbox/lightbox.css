@@ -83,7 +83,7 @@ padding-right: 20px;
 #imageData{
 	padding:0 10px;
 	}
-#imageData #imageDetails{ width: 70%; float: left; text-align: left; }	
+#imageData #imageDetails{ width: 70%; float: left; text-align: left; }
 #imageData #caption{ font-weight: bold;	}
 #imageData #numberDisplay{ display: block; clear: left; padding-bottom: 1.0em;	}
 #imageData #bottomNavClose{ width: 66px; float: right;  padding-bottom: 0.7em;	}
@@ -102,18 +102,18 @@ padding-right: 20px;
 	opacity: 0.6;
 	display: none;
 	}
-	
+
 
 .clearfix:after {
-	content: "."; 
-	display: block; 
-	height: 0; 
-	clear: both; 
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
 	visibility: hidden;
 	}
 
 * html>body .clearfix {
-	display: inline-block; 
+	display: inline-block;
 	width: 100%;
 	}
 
@@ -121,5 +121,4 @@ padding-right: 20px;
 	/* Hides from IE-mac \*/
 	height: 1%;
 	/* End hide from IE-mac */
-	}	
-	
+	}
