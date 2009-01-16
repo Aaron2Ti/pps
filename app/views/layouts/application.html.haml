@@ -22,11 +22,7 @@
     .body
       .recommend
         本周下载次数最多:
-        .paper
-          = image_tag @recommend_part.jpg
-          %p= @recommend_part.desc
-          - @recommend_part.jpgs.each do |jpg|
-            %a.lightbox{:href => jpg, :rel => @recommend_part }
+        .paper= render :partial => 'part_box', :locals => {:part => @recommend_part}
 
         %img{:src => '/images/left.png', :style => 'margin-top: 20px'}
       .menu

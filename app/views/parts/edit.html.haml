@@ -2,16 +2,18 @@
   = stylesheet_link_tag 'paper'
   = javascript_include_tag 'jquery.form', 'form'
 
-.paper
-  = image_tag @part.jpg
-  %p= @part.desc
-  - @part.jpgs.each do |jpg|
-    %a.lightbox{:href => jpg, :rel => @part }
+.paper= render :partial => 'part_box', :locals => {:part => @part}
 .edit-part
   - form_for @part do |f|
     .field
-      = f.label :desc, '名称'
-      = f.text_field :desc
+      = f.label :name, '名称'
+      = f.text_field :name
+    .field
+      = f.label :tag_summary, '标签'
+      = f.text_field :tag_summary
+    .field
+      = f.label :desc, '描述'
+      = f.text_area :desc
     .submit
       = submit_tag '保存'
       = link_to '返回', :back

@@ -1,13 +1,10 @@
 - content_for :head do
   = stylesheet_link_tag 'paper'
 
-%p 最近上传的模块
+%p 最近上传的模型
 - @parts.each do |part|
   .paper
-    = image_tag part.jpg
+    = render :partial => 'part_box', :locals => {:part => part}
     = link_to '查看', part_path(part), :class => 'show'
     = link_to '编辑', edit_part_path(part), :class => 'edit'
     = link_to '删除', part_path(part), :method => :delete, :class => 'delete'
-    %p= part.desc
-    - part.jpgs.each do |jpg|
-      %a.lightbox{:href => jpg, :rel => part }

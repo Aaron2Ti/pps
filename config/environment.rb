@@ -30,3 +30,4 @@ end
 Mime::Type.register 'application/octet-stream', :sldprt
 
 ActionView::Helpers::InstanceTag::DEFAULT_FIELD_OPTIONS = {}
+ActionView::Helpers::InstanceTag::DEFAULT_TEXT_AREA_OPTIONS = {:rows => 5}

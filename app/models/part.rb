@@ -14,12 +14,30 @@ class Part < Paper
     :message => 'Only Accept SolidWork\'s Part Drawing Currently'
   validates_inclusion_of :size, :in => 1.kilobyte..5.megabytes, :on => :create,
     :message => 'Only Accept File Size Between 1KB and 5MB'
-  validates_presence_of :desc
+  validates_presence_of :name
 
-  # TODO Part.find_by_tags
-  def find_by_tags(tag_names)
-    # 'aaa bbb ccc'
-    # cache the results
+  def self.search(keywords)
+     results = Tag.sanitize_name(keywords).collect do |keyword|
+       find_by_keyword(keyword)
+     end
+     results << find_by_tags(keywords)
+     results.flatten.uniq
+  end
+
+  def self.find_by_keyword(keyword)
+    all(:conditions => ['name like ?', "%#{keyword}%"])
+  end
+
+  # 'aaa bbb ccc'
+  def self.find_by_tags(tag_names)
+    taggings = Tag.sanitize_name(tag_names).collect do |name|
+                 tag = Tag.find_by_name(name, :select => [:id], :include => [:taggings])
+                 tag.taggings.all(:conditions => {:taggable_type => 'Paper'}) if tag
+               end.flatten
+
+    ids = taggings.collect{ |tagging| tagging.taggable_id }.uniq unless taggings.empty?
+
+    find(ids) if ids
   end
 
   def tag_list
@@ -32,9 +50,13 @@ class Part < Paper
   end
 
   def tag_summary=(tag_names)
-    self.taggings = []
-    Tag.sanitize_name(tag_names).each do |e|
-      self.tags << Tag.find_or_create_by_name(e)
+    old_tags = self.taggings.collect(&:tag_id)
+    new_tags = Tag.sanitize_name(tag_names).collect{ |e| Tag.find_or_create_by_name(e).id }
+
+    self.taggings.all( :conditions => {:tag_id => (old_tags - new_tags)} ).
+                  each(&:delete) unless (old_tags - new_tags).empty?
+    (new_tags - old_tags).each do |tag_id|
+      self.taggings << Tagging.new(:tag_id => tag_id)
     end
   end
 
@@ -114,7 +136,7 @@ class Part < Paper
   def preprocess
     # Marchal and Inflate the part
     part = Marshal.dump({ :id => id,
-                          :filename => filename ,
+                          :filename => filename,
                           :process_type => 'preprocess' })
     JobsQueue.instance.add('process_drawing', part)
   end
@@ -128,5 +150,9 @@ class Part < Paper
                           :params => params.to_a,
                           :process_type => 'change' })
     JobsQueue.instance.add('process_drawing', part)
+  end
+
+  def published?
+    published
   end
 end
