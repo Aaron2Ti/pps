@@ -3,7 +3,7 @@
 
 %p 最近上传的模块
 - @parts.each do |part|
-  %div.paper
+  .paper
     = image_tag part.jpg
     = link_to '查看', part_path(part), :class => 'show'
     = link_to '编辑', edit_part_path(part), :class => 'edit'

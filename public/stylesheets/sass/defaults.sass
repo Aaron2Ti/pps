@@ -16,6 +16,10 @@ input[type='text'], input[type='textarea'], input[type='file']
   background-color: #234
   border: 2px dotted
   border-color = !bd_c
+  &:focus, &:hover
+    border: 2px solid
+    border-color = !bd_c + #333
+
 //+++++++++++++++++++++++++++++++++++
 form.search
   position: absolute
@@ -60,16 +64,6 @@ form.search
     width: 160px
     float: right
     padding: 10px 0
-    a
-      display: block
-      text-decoration: none
-      background: #2d2d30
-      border-left: 4px solid
-      border-left-color = !bd_c
-      margin: 5px
-      padding: 2px 20px
-      &:hover
-        text-decoration: underline
   .recommend
     width: 160px
     float: left
@@ -90,3 +84,32 @@ form.search
   border-color: #ddc
 
 //++++++++++++++++++++++++++++++++++
+.menu > a
+  display: block
+  text-decoration: none
+  background: #2d2d30
+  border-left: 4px solid
+  border-left-color = !bd_c
+  margin: 5px
+  padding: 2px 20px
+  font-family: '黑体'
+  &:hover
+    text-decoration: underline
+    font-weight: bold
+    font-family: '宋体'
+//++++++++++++++++++++++++++++++++++
+.center form
+  .field
+    margin: 10px 15px
+    text-align: right
+    label
+      padding-right: 2px
+  .submit
+    text-align: right
+    margin: 10px 15px
+    *
+      margin: 0 5px
+//++++++++++++++++++++++++++++++++++
+.new_parameter
+  input[type='text']
+    width: 80%

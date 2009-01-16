@@ -3,7 +3,7 @@
   %head
     = stylesheet_link_tag 'reset', 'defaults', 'lightbox/lightbox'
     /[if IE]
-      = stylesheet_link_tag 'ie'
+      -#= stylesheet_link_tag 'ie'
     = stylesheet_link_tag 'print', :media => 'print'
 
     = javascript_tag "window._token = '#{form_authenticity_token}'"
@@ -21,7 +21,6 @@
           %input{:type => 'text', :value => 'Searching...' }
     .body
       .recommend
-        -#%a.lightbox{:herf => @recommend_part.jpg, :ref => 'Part', :title => 'Hello world'} Hello
         本周下载次数最多:
         .paper
           = image_tag @recommend_part.jpg
@@ -29,7 +28,7 @@
           - @recommend_part.jpgs.each do |jpg|
             %a.lightbox{:href => jpg, :rel => @recommend_part }
 
-        %img{:src => '/images/left.jpg', :style => 'margin-top: 20px'}
+        %img{:src => '/images/left.png', :style => 'margin-top: 20px'}
       .menu
         = link_to '所有模块', parts_path
         = link_to '上传新模块', new_part_path
@@ -37,6 +36,7 @@
         = link_to '功能4', '#'
       .center
         = yield
+        = clear
       = clear
     .foot
       = link_to '关于', '/about.html'

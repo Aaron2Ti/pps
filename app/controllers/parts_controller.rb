@@ -23,7 +23,7 @@ class PartsController < ApplicationController
   end
 
   def show
-    @part = Part.find(params[:id])
+    @part = Part.find(params[:id], :include => [:parameters])
   end
 
   def destroy

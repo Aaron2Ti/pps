@@ -1,10 +1,17 @@
 - content_for :head do
   = stylesheet_link_tag 'paper'
   = javascript_include_tag 'jquery.form', 'form'
-- form_for @part do |f|
-  .field
-    = f.label :desc, '名称'
-    = f.text_field :desc
-  .submit
-    = submit_tag '保存'
-    = link_to '返回', :back
+
+.paper
+  = image_tag @part.jpg
+  %p= @part.desc
+  - @part.jpgs.each do |jpg|
+    %a.lightbox{:href => jpg, :rel => @part }
+.edit-part
+  - form_for @part do |f|
+    .field
+      = f.label :desc, '名称'
+      = f.text_field :desc
+    .submit
+      = submit_tag '保存'
+      = link_to '返回', :back

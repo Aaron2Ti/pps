@@ -4,7 +4,7 @@
 = vrml(@part.wrl)
 .desc
   = link_to @part.desc, edit_part_path(@part)
-  = link_to '参数列表', part_parameters_path(@part)
+  = link_to_parameters(@part)
 
   - form_tag change_part_path(@part), :method => :put  do
     - @part.parameters.each do |p|
