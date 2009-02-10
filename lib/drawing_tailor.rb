@@ -2,6 +2,7 @@ require 'sldworks'
 require 'rubygems'
 require 'starling'
 
+# TODO needs clean
 APP_ROOT = '//192.168.6.88/aaron/workspace/pps'
 
 STARLING = Starling.new '192.168.6.88:22122'

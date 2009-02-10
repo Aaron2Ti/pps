@@ -1,4 +1,4 @@
 = image_tag part.jpg
-%p= truncate(part.name, 9)
+%p= truncate(part.name, :length => 9)
 - part.jpgs.each do |jpg|
   %a.lightbox{:href => jpg, :rel => part }
