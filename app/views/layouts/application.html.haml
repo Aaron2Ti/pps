@@ -2,6 +2,7 @@
 %html
   %head
     = stylesheet_link_tag 'reset', 'defaults', 'lightbox/lightbox'
+    = stylesheet_link_tag 'paper'
     /[if IE]
       -#= stylesheet_link_tag 'ie'
     = stylesheet_link_tag 'print', :media => 'print'
@@ -11,7 +12,6 @@
 
     %link{:rel => 'shortcut icon', :href => '/favicon.ico'}
     %title= "#{@title}&#402;&#32;&#8776;&#32;参数化3D模型共享平台"
-    = yield :head
   %body
     .head
       %div
