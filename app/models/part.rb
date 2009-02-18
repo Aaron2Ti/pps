@@ -130,6 +130,7 @@ class Part < Paper
 
     thumbnail = File.join(File.dirname(img_file), 'preview.jpg')
 
+    # #{width}x#{heiht}+#{left}+#{top}
     img.crop("#{s}x#{s}+#{l}+#{t}").scale(140).write(thumbnail)
   end
 

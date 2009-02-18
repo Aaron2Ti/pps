@@ -18,8 +18,8 @@ Rails::Initializer.run do |config|
   config.active_record.timestamped_migrations = false
 
   config.gem 'haml',         :version => '>= 2.0.4'
-  config.gem 'mini_magick',         :version => '>= 1.2.3'
-  config.gem 'sqlite3-ruby', :lib => 'sqlite3'
+  config.gem 'mini_magick',  :version => '>= 1.2.3'
+  config.gem 'sqlite3-ruby', :lib     => 'sqlite3'
   # config.gem 'rmagick'#, :version => '>= 2.7.0'
 
   # config.gem 'zipruby', :version => '>= 0.2.9'
