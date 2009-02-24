@@ -19,6 +19,13 @@
         %form.search
           %a{:href => '#'} 搜索
           %input{:type => 'text', :value => 'Searching...' }
+        - if !current_user
+          = link_to "Register", new_account_path
+          = link_to "Log In", new_user_session_path
+        - else
+          = link_to "My Account", account_path
+          = link_to "Logout", user_session_path, :method => :delete
+          = flash[:notice]
     .body
       .recommend
         本周下载次数最多:
@@ -29,7 +36,8 @@
         = link_to '所有模块', parts_path
         = link_to '上传新模块', new_part_path
         = link_to '功能3', '#'
-        = link_to '功能4', '#'
+        = link_to 'Logout', user_session_path, :method => :delete
+        = current_user ? current_user.login : 'Please Login'
       .center
         = yield
         = clear

@@ -1,13 +1,11 @@
 #APP_ROOT = 'E:/workspace/pps'
 
-RAILS_GEM_VERSION = '2.3.0' unless defined? RAILS_GEM_VERSION
-
+RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
 
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
   config.frameworks -= [ :active_resource, :action_mailer ]
-  config.plugins = %w( haml )
 
   config.action_controller.session = {
     :session_key => '_pps_session',
@@ -17,8 +15,9 @@ Rails::Initializer.run do |config|
   # use numeric prefix migration name conventions
   config.active_record.timestamped_migrations = false
 
-  config.gem 'haml',         :version => '>= 2.0.4'
-  config.gem 'mini_magick',  :version => '>= 1.2.3'
+  config.gem 'haml',        :version => '>= 2.0.4'
+  config.gem 'authlogic'    :version => '>= 1.4.3'
+  config.gem 'mini_magick', :version => '>= 1.2.3'
   config.gem 'sqlite3-ruby', :lib     => 'sqlite3'
   # config.gem 'rmagick'#, :version => '>= 2.7.0'
 

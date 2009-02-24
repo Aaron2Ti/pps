@@ -1,0 +1,7 @@
+Please fill all the blanks in order to signup
+- form_for :user, :url => @user do |f|
+  = f.error_messages
+  = f.text_field :login
+  = f.password_field  :password
+  = f.password_field  :password_confirmation
+  = submit_tag 'save'

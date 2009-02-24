@@ -1,0 +1,8 @@
+Please Login!
+- form_for @user_session , :url => :user_session do |f|
+  = f.error_messages
+  = f.label :login
+  = f.text_field :login
+  = f.label :password
+  = f.password_field :password
+  = submit_tag 'Login'
