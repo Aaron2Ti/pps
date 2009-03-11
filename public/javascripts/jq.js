@@ -25,7 +25,7 @@ $(function(){
   $('.lightbox').lightbox();
 //++++++++++++++Add Lightbox END++++++++++++++++++++++
 
-  $('div.menu > a').hover(
+  $('.menu > li').hover(
       function(){
         $(this).animate({
           color: '#aeafed',

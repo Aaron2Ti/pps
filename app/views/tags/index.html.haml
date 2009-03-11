@@ -1,0 +1,5 @@
+您所有的Tag:
+%ul
+  - @tags.each do |tag|
+    %li= link_to tag.name, parts_path
+

@@ -84,21 +84,21 @@ form.search
   border-color: #ddc
 
 //++++++++++++++++++++++++++++++++++
-.menu > a
-  display: block
-  text-decoration: none
+.menu > li
+  list-style: none
   background: #2d2d30
   border-left: 4px solid
   border-left-color = !bd_c
   margin: 5px
   padding: 2px 20px
-  font-family: '黑体'
-  &:hover
-    text-decoration: underline
-    font-weight: bold
-    font-family: '宋体'
+  a
+    text-decoration: none
+    &:hover
+      text-decoration: underline
+      font-weight: bold
 //++++++++++++++++++++++++++++++++++
 .center form
+  margin: 0 auto
   .field
     margin: 10px 15px
     text-align: right
@@ -109,6 +109,8 @@ form.search
     margin: 10px 15px
     *
       margin: 0 5px
+form.edit_user, form.new_user, form.new_user_session
+  width: 260px
 //++++++++++++++++++++++++++++++++++
 .new_parameter
   input[type='text']

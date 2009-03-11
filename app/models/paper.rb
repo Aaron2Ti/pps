@@ -3,6 +3,7 @@ require 'ftools'
 
 class Paper < ActiveRecord::Base
   belongs_to :archive
+  belongs_to :owner, :class_name => 'User'
 
   def path
     File.join self.archive.path, 'tmp'
@@ -26,6 +27,6 @@ class Paper < ActiveRecord::Base
 #   end
 #   def absolute_vrml_filename
 #     self.absolute_filename.sub(/.\w+$/, '.WRL').gsub(/\//, '\\')
-#     (File.dirname(self.absolute_filename) + '/' + vrml_filename).gsub(/\//, '\\') 
+#     (File.dirname(self.absolute_filename) + '/' + vrml_filename).gsub(/\//, '\\')
 #   end
 end

@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 11) do
+ActiveRecord::Schema.define(:version => 12) do
 
   create_table "archives", :force => true do |t|
     t.string  "desc"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(:version => 11) do
     t.boolean "published",    :default => false
     t.string  "name"
     t.integer "downloads",    :default => 0
+    t.integer "owner_id"
   end
 
   create_table "parameters", :force => true do |t|
@@ -45,6 +46,7 @@ ActiveRecord::Schema.define(:version => 11) do
     t.integer "tag_id"
     t.integer "taggable_id"
     t.string  "taggable_type"
+    t.integer "owner_id"
   end
 
   add_index "taggings", ["tag_id", "taggable_id", "taggable_type"], :name => "index_taggings_on_tag_id_and_taggable_id_and_taggable_type", :unique => true
@@ -62,6 +64,12 @@ ActiveRecord::Schema.define(:version => 11) do
     t.string   "persistence_token", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "name"
+    t.string   "email"
+    t.string   "title"
+    t.string   "company"
+    t.string   "avatar"
+    t.string   "type"
   end
 
 end

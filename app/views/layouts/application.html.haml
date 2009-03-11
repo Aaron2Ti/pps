@@ -25,11 +25,11 @@
         .paper= render :partial => 'parts/part_box', :locals => {:part => @recommend_part}
 
         %img{:src => '/images/left.png', :style => 'margin-top: 20px'}
-      .menu
-        = link_to '所有模块', parts_path
-        = link_to '上传新模块', new_part_path
-        = link_to '功能3', '#'
-        = current_user ? link_to('Logout', logout_path, :method => :delete) : link_to("Log In", login_path)
+      %ul.menu
+        %li= link_to '所有模块', parts_path
+        %li= link_to '上传新模块', new_part_path
+        %li= account_link
+        %li= link_to 'My Parts', account_parts_path
       .center
         = yield
         = clear

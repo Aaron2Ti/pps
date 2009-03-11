@@ -4,7 +4,7 @@ ActionController::Routing::Routes.draw do |map|
   map.logout '/logout', :controller => 'user_sessions', :action => 'destroy'
 
   map.resource :user_session
-  map.resource :account, :controller => 'users'
+  map.resource :account, :controller => 'users', :has_many => [:tags, :parts]
   map.resources :users
 
   map.resources :parts, :member => {:change => :put},
