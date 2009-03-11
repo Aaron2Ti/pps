@@ -19,7 +19,6 @@ Rails::Initializer.run do |config|
   config.gem 'authlogic',   :version => '>= 1.4.3'
   config.gem 'mini_magick', :version => '>= 1.2.3'
   config.gem 'sqlite3-ruby', :lib     => 'sqlite3'
-  # config.gem 'rmagick'#, :version => '>= 2.7.0'
   # config.gem 'zipruby', :version => '>= 0.2.9'
 end
 
