@@ -1,5 +1,20 @@
+/**
+ * jQuery Lightbox
+ * Version 0.5 - 11/29/2007
+ * @author Warren Krewenki
+ *
+ * This package is distributed under the BSD license.
+ * For full license information, see LICENSE.TXT
+ *
+ * Based on Lightbox 2 by Lokesh Dhakar (http://www.huddletogether.com/projects/lightbox2/)
+ * Originally written to make use of the Prototype framework, and Script.acalo.us, now altered to use jQuery.
+ *
+ *
+ **/
+
 (function($){
 	var opts;
+
 	$.fn.lightbox = function(options){
 		// build main options
 		opts = $.extend({}, $.fn.lightbox.defaults, options);
@@ -14,13 +29,20 @@
 		});
 	};
 
-	// lightbox functions
+	
+	
+	/**
+	 * initalize()
+	 *
+	 * @return void
+	 * @author Warren Krewenki
+	 */
 	$.fn.lightbox.initialize = function(){
 		$('#overlay').remove();
 		$('#lightbox').remove();
 		opts.inprogress = false;
-		var outerImage = '<div id="outerImageContainer"><div id="imageContainer"><img id="lightboxImage"><div id="hoverNav"><a href="javascript://" title="' + opts.strings.prevLinkTitle + '" id="prevLink"></a><a href="javascript://" id="nextLink" title="' + opts.strings.nextLinkTitle + '"></a></div><div id="loading"><a href="javascript://" id="loadingLink"><img src="'+opts.fileLoadingImage+'"></a></div></div></div>';
-		var imageData = '<div id="imageDataContainer" class="clearfix"><div id="imageData"><div id="imageDetails"><span id="caption"></span><span id="numberDisplay"></span></div><div id="bottomNav">'
+		var outerImage = '<div id="outerImageContainer"><div id="imageContainer"><iframe id="lightboxIframe" /><img id="lightboxImage"><div id="hoverNav"><a href="javascript://" title="' + opts.strings.prevLinkTitle + '" id="prevLink"></a><a href="javascript://" id="nextLink" title="' + opts.strings.nextLinkTitle + '"></a></div><div id="loading"><a href="javascript://" id="loadingLink"><img src="'+opts.fileLoadingImage+'"></a></div></div></div>';
+		var imageData = '<div id="imageDataContainer" class="clearfix"><div id="imageData"><div id="imageDetails"><span id="caption"></span><span id="numberDisplay"></span></div><div id="bottomNav">';
 
 		if (opts.displayHelp)
 			imageData += '<span id="helpDisplay">' + opts.strings.help + '</span>';
@@ -46,54 +68,10 @@
 		$('#imageDataContainer').width(opts.widthCurrent);
 	};
 
+
 	$.fn.lightbox.getPageSize = function(){
-		var xScroll, yScroll;
-
-		if (window.innerHeight && window.scrollMaxY) {
-			xScroll = window.innerWidth + window.scrollMaxX;
-			yScroll = window.innerHeight + window.scrollMaxY;
-		} else if (document.body.scrollHeight > document.body.offsetHeight){ // all but Explorer Mac
-			xScroll = document.body.scrollWidth;
-			yScroll = document.body.scrollHeight;
-		} else { // Explorer Mac...would also work in Explorer 6 Strict, Mozilla and Safari
-			xScroll = document.body.offsetWidth;
-			yScroll = document.body.offsetHeight;
-		}
-
-		var windowWidth, windowHeight;
-
-		if (self.innerHeight) { // all except Explorer
-			if(document.documentElement.clientWidth){
-				windowWidth = document.documentElement.clientWidth;
-			} else {
-				windowWidth = self.innerWidth;
-			}
-			windowHeight = self.innerHeight;
-		} else if (document.documentElement && document.documentElement.clientHeight) { // Explorer 6 Strict Mode
-			windowWidth = document.documentElement.clientWidth;
-			windowHeight = document.documentElement.clientHeight;
-		} else if (document.body) { // other Explorers
-			windowWidth = document.body.clientWidth;
-			windowHeight = document.body.clientHeight;
-		}
-
-		// for small pages with total height less then height of the viewport
-		if(yScroll < windowHeight){
-			pageHeight = windowHeight;
-		} else {
-			pageHeight = yScroll;
-		}
-
-
-		// for small pages with total width less then width of the viewport
-		if(xScroll < windowWidth){
-			pageWidth = xScroll;
-		} else {
-			pageWidth = windowWidth;
-		}
-
-		var arrayPageSize = new Array(pageWidth,pageHeight,windowWidth,windowHeight);
-		return arrayPageSize;
+		var jqueryPageSize = new Array($(document).width(),$(document).height(), $(window).width(), $(window).height());
+		return jqueryPageSize;
 	};
 
 
@@ -123,26 +101,25 @@
 	};
 
 	$.fn.lightbox.start = function(imageLink){
-
+		
 		$("select, embed, object").hide();
 		var arrayPageSize = $.fn.lightbox.getPageSize();
-		$("#overlay").hide().css({width: '100%', height: arrayPageSize[1]+'px', opacity: opts.overlayOpacity}).fadeIn();
+		$("#overlay").hide().css({width: '100%', height: arrayPageSize[1]+'px', opacity : opts.overlayOpacity}).fadeIn();
 		opts.imageArray = [];
 		imageNum = 0;
 
-		var anchors = document.getElementsByTagName( imageLink.tagName);
 
 		// if image is NOT part of a set..
 		if(!imageLink.rel || (imageLink.rel == '')){
 			// add single image to Lightbox.imageArray
-			opts.imageArray.push(new Array(imageLink.href, opts.displayTitle ? imageLink.title: ''));
+			opts.imageArray.push(new Array(imageLink.href, opts.displayTitle ? imageLink.title : ''));
 		} else {
 		// if image is part of a set..
 			$("a").each(function(){
 				if(this.href && (this.rel == imageLink.rel)){
-					opts.imageArray.push(new Array(this.href, opts.displayTitle ? this.title: ''));
+					opts.imageArray.push(new Array(this.href, opts.displayTitle ? this.title : ''));
 				}
-			})
+			});
 
 
 			for(i = 0; i < opts.imageArray.length; i++){
@@ -160,6 +137,7 @@
 		var lightboxTop = arrayPageScroll[1] + (arrayPageSize[3] / 10);
 		var lightboxLeft = arrayPageScroll[0];
 		$('#lightbox').css({top: lightboxTop+'px', left: lightboxLeft+'px'}).show();
+
 
 		if (!opts.slideNavBar)
 			$('#imageData').hide();
@@ -222,10 +200,10 @@
 			$('#lightboxImage').attr('src', opts.imageArray[opts.activeImage][0])
 							   .width(newWidth).height(newHeight);
 			$.fn.lightbox.resizeImageContainer(newWidth, newHeight);
-		}
+		};
 
 		imgPreloader.src = opts.imageArray[opts.activeImage][0];
-	}
+	};
 	
 	$.fn.lightbox.end = function(){
 		$.fn.lightbox.disableKeyboardNav();
@@ -317,6 +295,8 @@
 
 	$.fn.lightbox.updateDetails = function(){
 
+		$('#numberDisplay').html('');
+
 		if(opts.imageArray[opts.activeImage][1]){
 			$('#caption').html(opts.imageArray[opts.activeImage][1]).show();
 		}
@@ -327,14 +307,16 @@
 
 			nav_html = opts.strings.image + (opts.activeImage + 1) + opts.strings.of + opts.imageArray.length;
 
-			// display previous / next text links
-			if ((opts.activeImage) > 0) {
-				nav_html = '<a title="' + opts.strings.prevLinkTitle + '" href="#" id="prevLinkText">' + opts.strings.prevLinkText + "</a>" + nav_html;
-			}
+			if (!opts.disableNavbarLinks) {
+        // display previous / next text links
+        if ((opts.activeImage) > 0) {
+          nav_html = '<a title="' + opts.strings.prevLinkTitle + '" href="#" id="prevLinkText">' + opts.strings.prevLinkText + "</a>" + nav_html;
+        }
 
-			if ((opts.activeImage + 1) < opts.imageArray.length) {
-				nav_html += '<a title="' + opts.strings.nextLinkTitle + '" href="#" id="nextLinkText">' + opts.strings.nextLinkText + "</a>";
-			}
+        if ((opts.activeImage + 1) < opts.imageArray.length) {
+          nav_html += '<a title="' + opts.strings.nextLinkTitle + '" href="#" id="nextLinkText">' + opts.strings.nextLinkText + "</a>";
+        }
+      }
 
 			$('#numberDisplay').html(nav_html).show();
 		}
@@ -351,24 +333,26 @@
 	};
 
 	$.fn.lightbox.updateNav = function(){
-		$('#hoverNav').show();
+		if(opts.imageArray.length > 1){
+			$('#hoverNav').show();
 
-		// if not first image in set, display prev image button
-		if(opts.activeImage != 0){
-			$('#prevLink,#prevLinkText').show().click(function(){
-				$.fn.lightbox.changeImage(opts.activeImage - 1); return false;
-			});
+			// if not first image in set, display prev image button
+			if(opts.activeImage != 0){
+				$('#prevLink,#prevLinkText').show().click(function(){
+					$.fn.lightbox.changeImage(opts.activeImage - 1); return false;
+				});
+			}
+
+			// if not last image in set, display next image button
+			if(opts.activeImage != (opts.imageArray.length - 1)){
+				$('#nextLink,#nextLinkText').show().click(function(){
+
+					$.fn.lightbox.changeImage(opts.activeImage +1); return false;
+				});
+			}
+
+			$.fn.lightbox.enableKeyboardNav();
 		}
-
-		// if not last image in set, display next image button
-		if(opts.activeImage != (opts.imageArray.length - 1)){
-			$('#nextLink,#nextLinkText').show().click(function(){
-
-				$.fn.lightbox.changeImage(opts.activeImage +1); return false;
-			});
-		}
-
-		$.fn.lightbox.enableKeyboardNav();
 	};
 
 
@@ -381,33 +365,34 @@
 	};
 
 	$.fn.lightbox.defaults = {
-    fileLoadingImage: '/stylesheets/lightbox/loading.gif',
-		fileBottomNavCloseImage: '/stylesheets/lightbox/closelabel.gif',
-    imageArray:     new Array,
-    activeImage:    null,
-    borderSize:       10,
-    xScale:           1,
-    yScale:           1,
-    resizeSpeed:      350,
-    widthCurrent:     250,
-    heightCurrent:    250,
-    overlayOpacity:   0.8,
-    navBarSlideSpeed: 350,
-    inprogress:   false,
-    displayTitle: true,
-    navbarOnTop:  false,
-    slideNavBar:  false, // slide nav bar up/down between image resizing transitions
-    displayHelp:  false,
-		strings: {
+		fileLoadingImage : 'images/loading.gif',
+		fileBottomNavCloseImage : 'images/closelabel.gif',
+		overlayOpacity : 0.8,
+		borderSize : 10,
+		imageArray : new Array,
+		activeImage : null,
+		inprogress : false,
+		resizeSpeed : 350,
+		widthCurrent: 250,
+		heightCurrent: 250,
+		xScale : 1,
+		yScale : 1,
+		displayTitle: true,
+		navbarOnTop: false,
+		slideNavBar: false, // slide nav bar up/down between image resizing transitions
+		navBarSlideSpeed: 350,
+		displayHelp: false,
+		strings : {
 			help: ' \u2190 / P - previous image\u00a0\u00a0\u00a0\u00a0\u2192 / N - next image\u00a0\u00a0\u00a0\u00a0ESC / X - close image gallery',
 			prevLinkTitle: 'previous image',
 			nextLinkTitle: 'next image',
 			prevLinkText:  '&laquo; Previous',
 			nextLinkText:  'Next &raquo;',
 			closeTitle: 'close image gallery',
-			image: '图片 ',
-			of: ' - '
+			image: 'Image ',
+			of: ' of '
 		},
-		fitToScreen: true		// resize images if they are bigger than window
+		fitToScreen: false,		// resize images if they are bigger than window
+    disableNavbarLinks: false
 	};
 })(jQuery);
