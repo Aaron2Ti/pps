@@ -29,8 +29,8 @@
 		});
 	};
 
-	
-	
+
+
 	/**
 	 * initalize()
 	 *
@@ -101,7 +101,7 @@
 	};
 
 	$.fn.lightbox.start = function(imageLink){
-		
+
 		$("select, embed, object").hide();
 		var arrayPageSize = $.fn.lightbox.getPageSize();
 		$("#overlay").hide().css({width: '100%', height: arrayPageSize[1]+'px', opacity : opts.overlayOpacity}).fadeIn();
@@ -204,7 +204,7 @@
 
 		imgPreloader.src = opts.imageArray[opts.activeImage][0];
 	};
-	
+
 	$.fn.lightbox.end = function(){
 		$.fn.lightbox.disableKeyboardNav();
 		$('#lightbox').hide();
@@ -365,8 +365,8 @@
 	};
 
 	$.fn.lightbox.defaults = {
-		fileLoadingImage : 'images/loading.gif',
-		fileBottomNavCloseImage : 'images/closelabel.gif',
+		fileLoadingImage : '/images/loading.gif',
+		fileBottomNavCloseImage : '/images/closelabel.gif',
 		overlayOpacity : 0.8,
 		borderSize : 10,
 		imageArray : new Array,

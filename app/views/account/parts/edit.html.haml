@@ -2,9 +2,9 @@
   = stylesheet_link_tag 'paper'
   = javascript_include_tag 'jquery.form', 'form'
 
-.paper= render :partial => 'part_box', :locals => {:part => @part}
+.paper= render :partial => '/parts/part_box', :locals => {:part => @part}
 .edit-part
-  - form_for @part do |f|
+  - form_for @part, :url => account_part_path(@part) do |f|
     .field
       = f.label :name, '名称'
       = f.text_field :name
