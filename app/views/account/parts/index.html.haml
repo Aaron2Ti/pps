@@ -1,7 +1,11 @@
 %p 最近上传的模型
-- @parts.each do |part|
-  .paper
-    = render :partial => '/parts/part_box', :locals => {:part => part}
-    = link_to '查看', part_path(part), :class => 'show'
-    = link_to '编辑', edit_account_part_path(part), :class => 'edit'
-    = link_to '删除', account_part_path(part), :method => :delete, :class => 'delete'
+%table
+  - @parts.in_groups_of(4) do |parts_row|
+    %tr
+      - parts_row.each do |part|
+        %td
+          .paper
+            = render :partial => '/parts/part_box', :locals => {:part => part} if part
+            = link_to '查看', part_path(part), :class => 'show' if part
+            = link_to '编辑', edit_account_part_path(part), :class => 'edit' if part
+            = link_to '删除', account_part_path(part), :method => :delete, :class => 'delete' if part
