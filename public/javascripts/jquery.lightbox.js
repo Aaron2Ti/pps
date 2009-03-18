@@ -384,13 +384,13 @@
 		displayHelp: false,
 		strings : {
 			help: ' \u2190 / P - previous image\u00a0\u00a0\u00a0\u00a0\u2192 / N - next image\u00a0\u00a0\u00a0\u00a0ESC / X - close image gallery',
-			prevLinkTitle: 'previous image',
-			nextLinkTitle: 'next image',
-			prevLinkText:  '&laquo; Previous',
-			nextLinkText:  'Next &raquo;',
-			closeTitle: 'close image gallery',
-			image: 'Image ',
-			of: ' of '
+			prevLinkTitle: '上一张',
+			nextLinkTitle: '下一张',
+			prevLinkText:  '&laquo;上一张',
+			nextLinkText:  '下一张 &raquo;',
+			closeTitle: '关闭',
+			image: '第',
+			of: '张 共:'
 		},
 		fitToScreen: false,		// resize images if they are bigger than window
     disableNavbarLinks: false

@@ -1,7 +1,10 @@
-标签列表
-%div{:style => 'border: 2px solid #e39; height: 160px; width: 140px'}
+.hot-tags
+  热门标签<br/>
   - @tags.each do |tag|
-    = link_to tag.name, parts_path
-  %div{:style => 'float: right'} hello
-
+    = link_to tag.name, papers_tagged_path(tag), :class => cycle('tag-1', 'tag-2', 'tag-3', 'tag-4', 'tag-5')
+  - @tags.each do |tag|
+    = link_to tag.name, papers_tagged_path(tag), :class => cycle('tag-1', 'tag-2', 'tag-3', 'tag-4', 'tag-5')
+  - @tags.each do |tag|
+    = link_to tag.name, papers_tagged_path(tag), :class => cycle('tag-1', 'tag-2', 'tag-3', 'tag-4', 'tag-5')
+  = link_to '更多...', tags_path, :class => 'more-tags'
 

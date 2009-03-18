@@ -6,14 +6,15 @@
   - @parts.in_groups_of(4) do |parts_row|
     %tr
       - parts_row.each do |part|
-        %td
-          .paper= render( :partial => 'part_box', :locals => {:part => part}) if part
-%div{:style => ''}
+        - if part
+          %td
+            .paper
+              = render( :partial => 'part_box', :locals => {:part => part})
+              = link_to '查看', part_path(part), :class => 'show'
 .hot-tags
   热门标签<br/>
   - @tags.each do |tag|
-    = link_to tag.name, parts_path, :class => cycle('tag-1', 'tag-2', 'tag-3', 'tag-4', 'tag-5')
-  = link_to '更多...', '/', :class => 'more-tags'
+    = link_to tag.name, papers_tagged_path(tag), :class => cycle('tag-1', 'tag-2', 'tag-3', 'tag-4', 'tag-5')
+  = link_to '更多...', tags_path, :class => 'more-tags'
 
-%p{:style => 'border: 2px solid #3e9; height: 160px;'} 模型分类<br/> TODO...
 %p{:style => 'border: 2px solid #39e; height: 160px;'} 模型厂商<br/> TODO...

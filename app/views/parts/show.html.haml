@@ -1,20 +1,31 @@
-- content_for :head do
-  = stylesheet_link_tag 'paper'
+.preview.paper{:style => 'width: 400px; height: 400px; position: absulote;'}
+  = render( :partial => 'part_box', :locals => {:part => @part})
+%table{:style => 'position: absolute; right: 0; top: 0; height: 140px;'}
+  %caption 模型的基本信息
+  %tr==<td>名称:</td><td>#{@part.name}</td>
+  %tr==<td>上传者:</td><td>#{@part.owner_name}</td>
+  %tr==<td>下载次数:</td><td>#{@part.downloads}</td>
+  %tr==<td>用户评分:</td><td>5</td>
+  %tr==<td>用户标签:</td><td>5,工业制品工, <br/>工业制品</td>
+  %tr
+    - form_for @part, :url => add_tags_part_path(@part) do |f|
+      %td= f.label :name, '新标签:'
+      %td
+        = text_field_tag 'tags', nil, :style => 'width: 90px'
+        = submit_tag '+'
+%p{:style => 'border: 2px dotted #c6e;'} 用户评论区 <br/> TODO
 
-= vrml(@part.wrl)
-.desc
-  = link_to @part.desc, edit_part_path(@part)
-  = link_to_parameters(@part)
+= link_to '返回', :back
 
-  - form_tag change_part_path(@part), :method => :put  do
-    - @part.parameters.each do |p|
-      .field
-        = label_tag "parameters[#{p.id}]", p.name
-        = text_field_tag "parameters[#{p.id}]", "#{p.value}"
-    .submit
-      = submit_tag '保存'
-      = link_to '返回', :back
+-#  - form_tag change_part_path(@part), :method => :put  do
+  - @part.parameters.each do |p|
+    .field
+      = label_tag "parameters[#{p.id}]", p.name
+      = text_field_tag "parameters[#{p.id}]", "#{p.value}"
+  .submit
+    = submit_tag '保存'
 -#     .field
 -#       = f.label :desc, '定义'
 -#       = f.text_field :def
 -#       = label for=<%= "parameters[#{p.id}]" %> <%= p.desc+': ' %></label>
+-#= vrml(@part.wrl)

@@ -9,7 +9,17 @@ $(function(){
 //  });
   //+++++++++++++Animate border color+++++++++++++++
   var bd_c = '#3a3a2f';        // border's color
-  var bd_h_c = '#ffb57d'       // border's color on mouse hover
+  var bd_h_c = '#ffb57d';      // border's color on mouse hover
+
+  $('.hot-tags').hover(
+    function(){
+      $(this).animate({ borderColor: bd_h_c });
+    },
+    function(){
+      $(this).animate({ borderColor: bd_c });
+    }
+  );
+
   $('div.paper').hover(
     function(){
       $(this).animate({ borderColor: bd_h_c });

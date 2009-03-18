@@ -5,6 +5,10 @@ class Paper < ActiveRecord::Base
   belongs_to :archive
   belongs_to :owner, :class_name => 'User'
 
+  def owner_name
+    owner.name
+  end
+
   def path
     File.join self.archive.path, 'tmp'
   end
