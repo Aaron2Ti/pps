@@ -1,6 +1,6 @@
 -#      = render :partial => 'part_box', :locals => {:part => part}
 
-%p{:style => 'border: 2px solid #39e; height: 160px;'} 欢迎来到在线参数化模型共享平台<br/> TODO...
+%p{:style => 'border: 2px solid #39e; height: 160px;'} 欢迎来到在线参数化模型共享平台<br/> 平台的基本介绍     ==  TODO...
 %p 模型列表:
 %table
   - @parts.in_groups_of(4) do |parts_row|
@@ -8,6 +8,12 @@
       - parts_row.each do |part|
         %td
           .paper= render( :partial => 'part_box', :locals => {:part => part}) if part
-%p{:style => 'border: 2px solid #e39; height: 160px;'} 热门标签<br/> TODO...
+%div{:style => ''}
+.hot-tags
+  热门标签<br/>
+  - @tags.each do |tag|
+    = link_to tag.name, parts_path, :class => cycle('tag-1', 'tag-2', 'tag-3', 'tag-4', 'tag-5')
+  = link_to '更多...', '/', :class => 'more-tags'
+
 %p{:style => 'border: 2px solid #3e9; height: 160px;'} 模型分类<br/> TODO...
 %p{:style => 'border: 2px solid #39e; height: 160px;'} 模型厂商<br/> TODO...

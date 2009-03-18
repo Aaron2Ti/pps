@@ -1,9 +1,8 @@
 class Account::PartsController < ApplicationController
+  before_filter :require_login
+
   def index
-    @owner = current_user
-    @parts = @owner.parts.all(:limit => 8)
-#    render :template => 'parts/index'
-#    render(:controller => 'Part', :action => 'index')
+    @parts = current_user.parts.all(:limit => 8)
   end
 
   def new

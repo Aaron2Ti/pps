@@ -1,5 +1,13 @@
-//++++++++++++++++++++++++Paper+++++++++++++++++++
 $(function(){
+  $('.head .account a').toggle(
+    function(){$('.head .account').animate({height: '180px'})},
+    function(){$('.head .account').animate({height: '32px'})}
+  );
+//  $('.head .account a').click(function(){
+//    $('.head .account p').load(this.href + '.js');
+//    return(false);
+//  });
+  //+++++++++++++Animate border color+++++++++++++++
   var bd_c = '#3a3a2f';        // border's color
   var bd_h_c = '#ffb57d'       // border's color on mouse hover
   $('div.paper').hover(
@@ -14,16 +22,6 @@ $(function(){
       $(this).children('p').animate({ bottom: -40 });
     }
   );
-
-//++++++++++++++Add Lightbox++++++++++++++++++++++
-// TODO Lightbox for Part previews should only have 4 images
-  $('div.paper > p').click(
-    function(){
-      $(this).next('a.lightbox').trigger('click');
-    }
-  );
-  $('.lightbox').lightbox();
-//++++++++++++++Add Lightbox END++++++++++++++++++++++
 
   $('.menu > li').hover(
       function(){
@@ -41,5 +39,12 @@ $(function(){
         });
       }
     );
+
+//++++++++++++++Add Lightbox++++++++++++++++++++++
+  $('div.paper > p').click(
+    function(){
+      $(this).next('a.lightbox').trigger('click');
+    }
+  );
+  $('.lightbox').lightbox();
 })
-//++++++++++++++++++++++++Paper+++++++++++++++++++

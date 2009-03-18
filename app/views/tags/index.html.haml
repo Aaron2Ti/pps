@@ -1,5 +1,7 @@
-您所有的Tag:
-%ul
+标签列表
+%div{:style => 'border: 2px solid #e39; height: 160px; width: 140px'}
   - @tags.each do |tag|
-    %li= link_to tag.name, parts_path
+    = link_to tag.name, parts_path
+  %div{:style => 'float: right'} hello
+
 

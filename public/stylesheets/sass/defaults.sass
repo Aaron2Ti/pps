@@ -11,7 +11,11 @@ body
   color = !fg_c
 a
   color = !fg_c
-input[type='text'], input[type='password'], input[type='textarea'], input[type='file'], textarea
+  text-decoration: none
+  &:hover
+    text-decoration: underline
+
+input[type='text'], input[type='password'], input[type='file'], textarea
   color = !fg_c
   background-color: #234
   border: 2px dotted
@@ -35,10 +39,11 @@ form.search
     border-color = !bd_c
     font-size: 22px
     height: 24px
+    float: left
   a
     float: right
-    display: block
     text-indent: -9999px
+    display: block
     width: 32px
     height: 32px
     background: url(/images/search.png) no-repeat
@@ -56,24 +61,33 @@ form.search
       text-align: center
       font-family: 黑体
       font-size: 36pt
+    .account
+      background = !bd_c
+      width: 160px
+      height: 32px
+      position: absolute
+      bottom: 0px
+      right: 0px
+      overflow: hidden
+      text-align: center
 //+++++++++++++++++++++++++++++++++++
 .body
   margin: 0 auto
   width: 980px
-  .menu
+  .east
     width: 160px
     float: right
-    padding: 10px 0
-  .recommend
+  .west
     width: 160px
     float: left
   .center
     width: 640px
     margin: 0 auto
     position: relative
+    table
+      width: 100%
     div.paper
       margin: 5px 3px
-      float: left
 //+++++++++++++++++++++++++++++++++++
 .foot
   +border
@@ -92,11 +106,10 @@ form.search
   margin: 5px
   padding: 2px 20px
   a
-    text-decoration: none
     &:hover
-      text-decoration: underline
       font-weight: bold
 //++++++++++++++++++++++++++++++++++
+
 .center form
   margin: 0 auto
   .field
@@ -111,7 +124,55 @@ form.search
       margin: 0 5px
 form.edit_user, form.new_user, form.new_user_session
   width: 260px
+
 //++++++++++++++++++++++++++++++++++
+
 .new_parameter
   input[type='text']
     width: 80%
+
+//+++++++++++++++++++++++++++++++++++
+
+a.tag-1
+  font-size: 1.2em
+  color: #4d6dab
+  &:hover
+    color: #73a3ff
+a.tag-2
+  font-size: 1.5em
+  color: #409136
+  &:hover
+    color: #6fff5f
+a.tag-3
+  font-size: 1.8em
+  color: #995b38
+  &:hover
+    color: #ff985d
+a.tag-4
+  font-size: 2.2em
+  color: #993988
+  &:hover
+    color: #ff60e2
+a.tag-5
+  color: #b2362d
+  font-size: 2.6em
+  &:hover
+    color: #ff4d41
+
+.hot-tags
+  border: 6px solid
+  border-color = !bd_c
+  padding: 10px
+  height: 160px
+  position: relative
+  a
+    &:hover
+      background: #345
+a.more-tags
+  display: block
+  position: absolute
+  padding: 2px 5px
+  bottom: 0px
+  right:  0px
+
+//+++++++++++++++++++++++++++++++++++

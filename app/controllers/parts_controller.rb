@@ -1,6 +1,7 @@
 class PartsController < ApplicationController
   def index
-    @parts = Part.all#(:limit => 8)
+    @parts = Part.all(:limit => 8)
+    @tags = Tag.all
   end
 
   def new
@@ -19,7 +20,7 @@ class PartsController < ApplicationController
   def update
     @part = Part.find(params[:id])
     @part.update_attributes!(params[:part])
-    render :nothing => true
+    redirect_to parts_path
   end
 
   def show

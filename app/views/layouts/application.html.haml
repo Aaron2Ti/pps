@@ -17,22 +17,28 @@
       %div
         %h1 参数化3D模型共享平台
         %form.search
-          %a{:href => '#'} 搜索
           %input{:type => 'text', :value => 'Searching...' }
+          %a{:href => '#'} 搜索
+        .account
+          = link_to '我的账户', account_path
+          %p
+            %img{:src => '/images/head.jpg', :style => 'border: 8px solid #cec'}
+            %p 贡献: <a style='color:red' href='/'>15 </a>模型 <a href='/' style='color: green'>15 </a>标签
     .body
-      .recommend
+      .west
         本周下载次数最多:
         .paper= render :partial => 'parts/part_box', :locals => {:part => @recommend_part}
 
         %img{:src => '/images/left.png', :style => 'margin-top: 20px'}
-      %ul.menu
-        %li= link_to '所有模块', parts_path
-        %li= link_to '上传新模块', new_part_path
-        %li= account_link
-        %li= link_to 'My Parts', account_parts_path
+      .east
+        %ul.menu
+          %li= link_to '主页', '/'
+          %li= account_link
+          %li= link_to '所有模块', parts_path
+          %li= link_to '上传新模块', new_part_path
+          %li= link_to 'My Parts', account_parts_path if current_user
       .center
         = yield
-        = clear
       = clear
     .foot
       = link_to '关于', '/about.html'

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :require_login, :only => [:show, :edit]
   def new
     @user = User.new
   end
@@ -13,6 +14,11 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
+
+    respond_to do |format|
+      format.html
+      format.js {render :js => 'alert();'}
+    end
   end
 
   def edit
