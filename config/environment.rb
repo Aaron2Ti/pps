@@ -1,6 +1,6 @@
 #APP_ROOT = 'E:/workspace/pps'
 
-RAILS_GEM_VERSION = '2.2.2' unless defined? RAILS_GEM_VERSION
+RAILS_GEM_VERSION = '2.3.2' unless defined? RAILS_GEM_VERSION
 
 require File.join(File.dirname(__FILE__), 'boot')
 
@@ -15,7 +15,7 @@ Rails::Initializer.run do |config|
   # use numeric prefix migration name conventions
   config.active_record.timestamped_migrations = false
 
-  config.gem 'haml',        :version => '>= 2.0.4'
+  config.gem 'haml',        :version => '>= 2.0.9'
   config.gem 'authlogic',   :version => '>= 1.4.3'
   config.gem 'mini_magick', :version => '>= 1.2.3'
   config.gem 'sqlite3-ruby', :lib     => 'sqlite3'
@@ -25,3 +25,5 @@ end
 # ? 'application/octet-stream'
 # SolidWorks Part's MimeType is 'application/presentations' or 'image/x-presentations'
 Mime::Type.register 'application/octet-stream', :sldprt
+ActionView::Helpers::InstanceTag.const_set(:DEFAULT_FIELD_OPTIONS, {})
+ActionView::Helpers::InstanceTag.const_set(:DEFAULT_TEXT_AREA_OPTIONS, {:rows => 5})

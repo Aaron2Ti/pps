@@ -5,8 +5,8 @@
 .upload-part
   - form_for @part, :html => {:multipart => true} do |f|
     .field
-      = f.label :desc, '名称'
-      = f.text_field :desc
+      = f.label :name, '名称'
+      = f.text_field :name
     .field
       = f.label :upload_file, '选择图纸'
       = f.file_field :upload_file

@@ -5,10 +5,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    User.create!(params[:user])
+    @user = User.new(params[:user])
+    @user.save!
     redirect_to account_url
   rescue
-    @user = User.new
     render :action => :new
   end
 
