@@ -1,0 +1,63 @@
+= error_messages_for :user
+- form_for @user do |f|
+  %p 账户信息
+  %fieldset
+    - if @user.new_record?
+      .field
+        = f.label :login, '用户名:'
+        = f.text_field :login
+    - else
+      .field
+        = f.label :login, '用户名:'
+        = f.text_field :login, :disabled => 'disabled'
+    .field
+      = f.label :email, 'E-mail:'
+      = f.text_field :email
+    .field
+      = f.label :password, '密码:'
+      = f.password_field :password
+    .field
+      = f.label :password_confirmation, '密码确认:'
+      = f.password_field :password_confirmation
+  %a{:href => '#'} 个人信息
+  %fieldset{:style => 'display: none;'}
+    .field
+      = f.label :name, '姓名:'
+      = f.text_field :name
+    .field
+      = f.label :company, '公司:'
+      = f.text_field :company
+    .field
+      = f.label :title, '职务:'
+      = f.text_field :title
+    .field
+      = f.label :website, '网址:'
+      = f.text_field :website
+  %a{:href => '#'} 地址信息
+  %fieldset{:style => 'display: none;'}
+    .field
+      = f.label :nation, '国家:'
+      = f.text_field :nation
+    .field
+      = f.label :province, '省份:'
+      = f.text_field :province
+    .field
+      = f.label :city, '城市:'
+      = f.text_field :city
+  %a{:href => '#'} 联系方式
+  %fieldset{:style => 'display: none;'}
+    .field
+      = f.label :address, '地址:'
+      = f.text_field :address
+    .field
+      = f.label :zipcode, '邮编:'
+      = f.text_field :zipcode
+    .field
+      = f.label :phone, '电话:'
+      = f.text_field :phone
+    .field
+      = f.label :fax, '传真:'
+      = f.text_field :fax
+  .submit
+    = submit_tag '保存'
+    = link_to '返回', :back

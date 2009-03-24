@@ -53,4 +53,9 @@ $(function(){
     }
   );
   $('.lightbox').lightbox();
+
+//++++++++Toggle User Form Fields++++++++++++++++++
+  $('#new_user > a, #edit_user > a').click(function(){
+    $(this).next('fieldset').toggle('slow');
+  });
 })

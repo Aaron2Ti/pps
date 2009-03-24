@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 12) do
+ActiveRecord::Schema.define(:version => 13) do
 
   create_table "archives", :force => true do |t|
     t.string  "desc"
@@ -70,6 +70,16 @@ ActiveRecord::Schema.define(:version => 12) do
     t.string   "company"
     t.string   "avatar"
     t.string   "type"
+    t.string   "primary_cad"
+    t.string   "company_name"
+    t.string   "nation"
+    t.string   "province"
+    t.string   "city"
+    t.string   "address"
+    t.string   "zipcode"
+    t.string   "phone"
+    t.string   "fax"
+    t.string   "website"
   end
 
 end

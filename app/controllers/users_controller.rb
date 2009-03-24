@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(params[:user])
+    @user.login = params[:user][:login]
     @user.save!
     redirect_to account_url
   rescue
