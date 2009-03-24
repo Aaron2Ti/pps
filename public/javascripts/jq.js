@@ -3,10 +3,6 @@ $(function(){
     function(){$('.head .account').animate({height: '180px'})},
     function(){$('.head .account').animate({height: '32px'})}
   );
-//  $('.head .account a').click(function(){
-//    $('.head .account p').load(this.href + '.js');
-//    return(false);
-//  });
   //+++++++++++++Animate border color+++++++++++++++
   var bd_c = '#3a3a2f';        // border's color
   var bd_h_c = '#ffb57d';      // border's color on mouse hover

@@ -1,7 +1,7 @@
 class PartsController < ApplicationController
   def index
     @parts = Part.all(:limit => 8)
-    @tags = Tag.all
+    @tags ||= Tag.all
   end
 
   def new
@@ -25,6 +25,7 @@ class PartsController < ApplicationController
 
   def show
     @part = Part.find(params[:id], :include => [:parameters])
+    @tagging = Tagging.new(:owner => current_user, :taggable => @part)
   end
 
   def destroy
@@ -36,5 +37,19 @@ class PartsController < ApplicationController
     @part = Part.find(params[:id])
     @part.change(params[:parameters]) if params[:parameters].size > 0
     redirect_to part_url(@part)
+  end
+
+  def tagged
+    @parts = Tag.find(params[:tag_ids]).taggings.map{|tagging| Part.find(tagging.taggable_id)}
+    @tags ||= Tag.all
+    render :action => :index
+  end
+
+  def add_tags
+    @tag = Tag.find_or_create_by_name(params[:tags])
+    Tagging.create!(:tag => @tag,
+      :taggable => Part.find(params[:id]),
+      :owner => current_user)
+    render :text => 'ok'
   end
 end

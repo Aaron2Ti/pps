@@ -2,7 +2,7 @@
 
 %p{:style => 'border: 2px solid #39e; height: 160px;'} 欢迎来到在线参数化模型共享平台<br/> 平台的基本介绍     ==  TODO...
 %p 模型列表:
-%table
+%table.papers
   - @parts.in_groups_of(4) do |parts_row|
     %tr
       - parts_row.each do |part|
@@ -17,4 +17,4 @@
     = link_to tag.name, papers_tagged_path(tag), :class => cycle('tag-1', 'tag-2', 'tag-3', 'tag-4', 'tag-5')
   = link_to '更多...', tags_path, :class => 'more-tags'
 
-%p{:style => 'border: 2px solid #39e; height: 160px;'} 模型厂商<br/> TODO...
+%p{:style => 'border: 2px solid #39e; height: 160px;'} 供应厂商<br/> TODO...
