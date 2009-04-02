@@ -18,7 +18,7 @@ Rails::Initializer.run do |config|
   config.gem 'haml',        :version => '>= 2.0.9'
   config.gem 'authlogic',   :version => '>= 1.4.3'
   config.gem 'mini_magick', :version => '>= 1.2.3'
-  config.gem 'sqlite3-ruby', :lib     => 'sqlite3'
+#  config.gem 'sqlite3-ruby', :lib     => 'sqlite3'
   # config.gem 'zipruby', :version => '>= 0.2.9'
 end
 
