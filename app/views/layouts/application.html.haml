@@ -3,6 +3,9 @@
   %head
     = stylesheet_link_tag 'reset', 'defaults', 'lightbox/lightbox'
     = stylesheet_link_tag 'paper'
+    /[if lte IE 6]
+      = javascript_include_tag 'ie6/ie6.js'
+      = javascript_tag 'window.onload=function(){e("/javascripts/ie6/")}'
     /[if IE]
       -#= stylesheet_link_tag 'ie'
     = stylesheet_link_tag 'print', :media => 'print'

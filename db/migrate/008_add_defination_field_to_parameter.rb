@@ -4,5 +4,6 @@ class AddDefinationFieldToParameter < ActiveRecord::Migration
   end
 
   def self.down
+    remove_column :parameters, :def
   end
 end
