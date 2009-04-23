@@ -1,3 +1,4 @@
+# encoding: utf-8
 module PartsHelper
   def vrml(src)
     tag :embed,
