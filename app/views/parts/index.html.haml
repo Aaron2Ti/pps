@@ -1,20 +1,30 @@
 -#      = render :partial => 'part_box', :locals => {:part => part}
 
-%p{:style => 'border: 2px solid #39e; height: 160px;'} 欢迎来到在线参数化模型共享平台<br/> 在这里, 您将获得海量的第三方3D模型.<br/>本平台提供所有功能完全<b>免费</b>.<br/> <a href='#'>详情介绍</a>
-%p 模型列表:
-%table.papers
-  - @parts.in_groups_of(4) do |parts_row|
-    %tr
-      - parts_row.each do |part|
-        - if part
-          %td
-            .paper
-              = render( :partial => 'part_box', :locals => {:part => part})
-              = link_to '查看', part_path(part), :class => 'show'
+.welcome
+  %h2 欢迎来到参数化3D模型共享平台
+  在这里,
+  %ul
+    %li 您将获得海量的第三方3D模型.
+    %li 本平台提供所有功能完全
+    %li 详情介绍
+.papers
+  模型列表:
+  %table
+    - @parts.in_groups_of(4) do |parts_row|
+      %tr
+        - parts_row.each do |part|
+          - if part
+            %td
+              .paper
+                = render( :partial => 'part_box', :locals => {:part => part})
+                = link_to '查看', part_path(part), :class => 'show'
 .hot-tags
-  热门标签<br/>
-  - @tags.each do |tag|
-    = link_to tag.name, papers_tagged_path(tag), :class => cycle('tag-1', 'tag-2', 'tag-3', 'tag-4', 'tag-5')
-  = link_to '更多...', tags_path, :class => 'more-tags'
+  热门标签:
+  %p
+    - @tags.each do |tag|
+      = link_to tag.name, papers_tagged_path(tag), :class => cycle('tag-1', 'tag-2', 'tag-3', 'tag-4', 'tag-5')
+    = link_to '更多...', tags_path, :class => 'more-tags'
 
-%p{:style => 'border: 2px solid #39e; height: 160px;'} 供应厂商<br/> TODO...
+.hot-tags
+  供应厂商:
+  %p TODO...

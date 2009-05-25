@@ -1,7 +1,7 @@
 class PartsController < ApplicationController
   def index
     @parts = Part.all(:limit => 8)
-    @tags ||= Tag.all
+    @tags = Tag.all(:limit => 15)
   end
 
   def new
