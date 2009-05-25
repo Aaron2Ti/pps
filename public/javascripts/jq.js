@@ -7,7 +7,7 @@ $(function(){
   var bd_c = '#3a3a2f';        // border's color
   var bd_h_c = '#ffb57d';      // border's color on mouse hover
 
-  $('.hot-tags > p').hover(
+  $('.hot-tags > div').hover(
     function(){
       $(this).animate({ borderColor: bd_h_c });
     },

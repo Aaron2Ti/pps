@@ -4,9 +4,9 @@
   %h2 欢迎来到参数化3D模型共享平台
   在这里,
   %ul
-    %li 您将获得海量的第三方3D模型.
-    %li 本平台提供所有功能完全
-    %li 详情介绍
+    %li 您将获得海量的第三方3D模型
+    %li 您可以轻松的发布自己的产品模型，方便客户使用
+    %li 本平台提供所有功能完全免费
 .papers
   模型列表:
   %table
@@ -20,11 +20,15 @@
                 = link_to '查看', part_path(part), :class => 'show'
 .hot-tags
   热门标签:
-  %p
+  %div
     - @tags.each do |tag|
       = link_to tag.name, papers_tagged_path(tag), :class => cycle('tag-1', 'tag-2', 'tag-3', 'tag-4', 'tag-5')
     = link_to '更多...', tags_path, :class => 'more-tags'
 
 .hot-tags
   供应厂商:
-  %p TODO...
+  %div.supplier{:rel => 'helll'}
+    - @suppliers.each do |supplier|
+      = render :partial => 'rounder_box', :locals => {:content =>  supplier.name}
+    = clear
+    = link_to '更多...', tags_path, :class => 'more-tags'

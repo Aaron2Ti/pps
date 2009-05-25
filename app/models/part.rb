@@ -146,9 +146,9 @@ class Part < Paper
     params = params.collect do |k, v|
       [Parameter.find(k).def, v.to_f]
     end
-    part = Marshal.dump({ :id => id,
-                          :filename => filename,
-                          :params => params.to_a,
+    part = Marshal.dump({ :id           => id,
+                          :filename     => filename,
+                          :params       => params.to_a,
                           :process_type => 'change' })
     JobsQueue.instance.add('process_drawing', part)
   end

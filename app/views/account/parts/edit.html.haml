@@ -3,17 +3,16 @@
   = javascript_include_tag 'jquery.form', 'form'
 
 .paper= render :partial => '/parts/part_box', :locals => {:part => @part}
-.edit-part
-  - form_for @part, :url => account_part_path(@part) do |f|
-    .field
-      = f.label :name, '名称'
-      = f.text_field :name
-    .field
-      = f.label :tag_summary, '标签'
-      = f.text_field :tag_summary
-    .field
-      = f.label :desc, '描述'
-      = f.text_area :desc
-    .submit
-      = submit_tag '保存'
-      = link_to '返回', :back
+- form_for @part, :url => account_part_path(@part) do |f|
+  .field
+    = f.label :name, '名称'
+    = f.text_field :name
+  .field
+    = f.label :tag_summary, '标签'
+    = f.text_field :tag_summary
+  .field
+    = f.label :desc, '描述'
+    = f.text_area :desc
+  .submit
+    = submit_tag '保存'
+    = link_to '返回', :back

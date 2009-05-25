@@ -1,31 +1,21 @@
-.preview.paper{:style => 'width: 400px; height: 400px; position: absulote;'}
-  = render( :partial => 'part_box', :locals => {:part => @part})
-%table{:style => 'position: absolute; right: 0; top: 0; height: 140px;'}
-  %caption 模型的基本信息
-  %tr==<td>名称:</td><td>#{@part.name}</td>
-  %tr==<td>上传者:</td><td>#{@part.owner_name}</td>
-  %tr==<td>下载次数:</td><td>#{@part.downloads}</td>
-  %tr==<td>用户评分:</td><td>5</td>
-  %tr==<td>用户标签:</td><td>5,工业制品工, <br/>工业制品</td>
+.paper= render( :partial => 'part_box', :locals => {:part => @part})
+%table.result
+  %caption== 模型#{@part.name}的基本信息
+
+  %tr== <td>名称:</td><td>#{@part.name}</td>
+  %tr== <td>上传者:</td><td>#{@part.owner_name}</td>
+  %tr== <td>下载次数:</td><td>#{@part.downloads}</td>
+  %tr== <td>用户评分:</td><td>#{rand 10}</td>
+  %tr== <td>用户标签:</td><td>#{@part.tags.collect(&:name).join(', ')}</td>
   %tr
     - form_for @part, :url => add_tags_part_path(@part) do |f|
       %td= f.label :name, '新标签:'
       %td
         = text_field_tag 'tags', nil, :style => 'width: 90px'
         = submit_tag '+'
-%p{:style => 'border: 2px dotted #c6e;'} 用户评论区 <br/> TODO
-
-= link_to '返回', :back
-
--#  - form_tag change_part_path(@part), :method => :put  do
-  - @part.parameters.each do |p|
-    .field
-      = label_tag "parameters[#{p.id}]", p.name
-      = text_field_tag "parameters[#{p.id}]", "#{p.value}"
-  .submit
-    = submit_tag '保存'
--#     .field
--#       = f.label :desc, '定义'
--#       = f.text_field :def
--#       = label for=<%= "parameters[#{p.id}]" %> <%= p.desc+': ' %></label>
--#= vrml(@part.wrl)
+  %tr
+    %td= link_to '参数列表', part_parameters_path(@part)
+    %td= link_to '参数化模型', change_part_path(@part)
+  %tr
+    %td
+    %td= link_to '返回', :back

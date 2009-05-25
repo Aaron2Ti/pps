@@ -1,14 +1,13 @@
-%h3
-  请配置模型
-  %strong=link_to @part.desc, part_path(@part)
-  的参数
-%table
+%table.result
+  %caption== 请配置模型<b>#{link_to @part.name, part_path(@part)}</b>的参数
   %tr
     %td 名称
     %td 初始值(mm)
     %td= link_to '新参数', new_part_parameter_path(@part)
   - @parameters.each do |p|
     %tr
-      %td= link_to p.name, edit_parameter_path(p) 
+      %td= link_to p.name, edit_parameter_path(p)
       %td= p.value
       %td= link_to '删除', parameter_path(p), :method => :delete
+  %tr== <td></td><td></td><td>#{link_to '返回', :back}</td>
+

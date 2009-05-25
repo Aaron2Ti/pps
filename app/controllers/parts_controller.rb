@@ -2,6 +2,8 @@ class PartsController < ApplicationController
   def index
     @parts = Part.all(:limit => 8)
     @tags = Tag.all(:limit => 15)
+    @suppliers = Supplier.all
+    @suppliers.sort!{|m, n| m.name.size <=> n.name.size}
   end
 
   def new
@@ -24,7 +26,7 @@ class PartsController < ApplicationController
   end
 
   def show
-    @part = Part.find(params[:id], :include => [:parameters])
+    @part = Part.find(params[:id], :include => [:parameters, :tags])
     @tagging = Tagging.new(:owner => current_user, :taggable => @part)
   end
 
@@ -35,8 +37,11 @@ class PartsController < ApplicationController
 
   def change
     @part = Part.find(params[:id])
+  end
+  def transform
+    @part = Part.find(params[:id])
     @part.change(params[:parameters]) if params[:parameters].size > 0
-    redirect_to part_url(@part)
+    redirect_to change_part_url(@part)
   end
 
   def tagged
@@ -50,6 +55,6 @@ class PartsController < ApplicationController
     Tagging.create!(:tag => @tag,
       :taggable => Part.find(params[:id]),
       :owner => current_user)
-    render :text => 'ok'
+    redirect_to part_url(params[:id])
   end
 end

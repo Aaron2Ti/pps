@@ -6,6 +6,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session
   map.resource :account, :controller => 'users'
   map.resources :users
+  map.resources :suppliers
   map.resources :tags, :only => [:index]
 #  map.resources :taggings
 
@@ -16,7 +17,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.resources :parts,
-                :member => {:add_tags => :put},
+                :member => {:add_tags => :put, :change => :get, :transform => :put},
 #                :collection => {:tag => :get},
                 :has_many => [:parameters],
                 :shallow => true
