@@ -98,6 +98,8 @@ form.search
     > div
       padding: 10px 0
       border-bottom: 3px solid #151509
+    div.paper
+      padding: 0
     > .welcome
       ul
         padding: 0 20px
@@ -113,12 +115,12 @@ form.search
 
 //+++++++++++++++++++++++++++++++++++
 .foot
-  +border
+  border: 10px solid
+  border-bottom: none
   margin: 0 auto
   width: 980px
   text-align: right
-  background: #ffe
-  border-color: #ddc
+  border-color: #151509
 
 //++++++++++++++++++++++++++++++++++
 .menu > li
@@ -187,15 +189,17 @@ a.tag-5
     color: #ff4d41
 
 .hot-tags
-  p
+  > div
     margin: 5px 10px
     border: 6px solid
     border-color = !bd_c
     padding: 10px
     position: relative
+    font-family: KaiTi_GB2312, 黑体
     a
       &:hover
         background: #345
+
 a.more-tags
   display: block
   position: absolute
@@ -207,8 +211,44 @@ a.more-tags
     border-left: 4px solid #ffb57d
 
 //+++++++++++++++++++++++++++++++++++
+//+++++++++++++++++++++++++++++++++++
 
 .papers > table
   margin: 0 auto
   .paper
     margin: 4px
+
+table.rounder
+  float: left
+  margin: 5px
+  &:hover
+    color: #92d8e9
+  td.left
+    width: 10px
+    background: url(/images/rounder.png) top left
+  td.right
+    width: 10px
+    background: url(/images/rounder.png) top right
+  td
+    height: 40px
+    background: url(/images/rounder.png) bottom left
+
+.center table.result
+  margin: 0 auto
+  width: 60%
+  border-spacing:4px
+  caption
+    color: #92d8e9
+    font-family: STXingKai, KaiTi_GB2312, 黑体
+    font-size: 16pt
+  td
+    padding: 4px
+    border-bottom: 4px dotted
+    border-color: #151509
+.center > img.isometric
+  display: block
+  margin: 10px auto
+  border: 5px solid
+  border-color = !bd_c
+  opacity: 0.8
+  filter: alpha(opacity = 80)

@@ -3,7 +3,7 @@
   %tr
     %td 名称
     %td 初始值(mm)
-    %td= link_to '新参数', new_part_parameter_path(@part)
+    %td= link_to '新建', new_part_parameter_path(@part)
   - @parameters.each do |p|
     %tr
       %td= link_to p.name, edit_parameter_path(p)

@@ -110,6 +110,10 @@ class Part < Paper
     available ? "/papers/part_#{id}/preview.jpg" : '/images/preview.jpg'
   end
 
+  def isometric_jpg
+    "/papers/part_#{id}/isometric.jpg "
+  end
+
   def jpgs
     %W(
       /papers/part_#{id}/isometric.jpg

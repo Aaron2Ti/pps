@@ -1,13 +1,2 @@
 - form_for [@part, @parameter] do |f|
-  .field
-    = f.label :name, '名称'
-    = f.text_field :name
-  .field
-    = f.label :desc, '定义'
-    = f.text_field :def
-  .field
-    = f.label :value, '默认值'
-    = f.text_field :value
-  .submit
-    = submit_tag '保存'
-    = link_to '返回', :back
+  = render :partial => 'form', :locals => {:f => f}

@@ -29,6 +29,16 @@ $(function(){
     }
   );
 
+  $('div.center > img.isometric').hover(
+    function(){
+      $(this).animate({ borderColor: bd_h_c });
+      $(this).animate({ opacity: 1 });
+    },
+    function(){
+      $(this).animate({ borderColor: bd_c });
+      $(this).animate({ opacity: 0.8 });
+    }
+  );
   $('.menu > li').hover(
       function(){
         $(this).animate({

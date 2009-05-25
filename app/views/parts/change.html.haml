@@ -1,6 +1,4 @@
-=# vrml @part.wrl
-%embed{:width => 400, :height => 400, :type => "model/vrml", :src => "/papers/part_163/3d.wrl", :skin => "{46BB95BF-8EB4-481A-A1EF-50D43FC32B9D}", :contextmenu => "false",  :consolemode => 0,  :style => 'display: block; margin: 0 auto;' }
-  = image_tag 'processing.png', :size => '400x400', :style => 'display: block; margin: 0 auto;'
+= image_tag @part.isometric_jpg, :class => 'isometric'
 - form_for @part, :url => transform_part_path(@part) do |f|
   %h3== 模型#{link_to @part.name, part_parameters_path(@part)}的可选参数如下:
   - @part.parameters.each do |parameter|
