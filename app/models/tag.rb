@@ -2,6 +2,10 @@
 class Tag < ActiveRecord::Base
   has_many :taggings, :dependent => :delete_all
 
+  def parts
+    taggings.map{|tagging| Part.find(tagging.taggable_id)}
+  end
+
   class << self
     def sanitize_name(tag_names)
       tag_names.gsub(/　|——|。|｜|（|）|《|》|！|：|￥/, ''). # delete unwanted charaters

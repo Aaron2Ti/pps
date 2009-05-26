@@ -5,6 +5,7 @@
 .upload-part
   - form_for @part, :html => {:multipart => true} do |f|
     .field
+      %h2== 选择您要上传新模型
       = f.label :name, '名称'
       = f.text_field :name
     .field

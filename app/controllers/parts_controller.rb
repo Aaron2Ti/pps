@@ -38,6 +38,7 @@ class PartsController < ApplicationController
   def change
     @part = Part.find(params[:id])
   end
+
   def transform
     @part = Part.find(params[:id])
     @part.change(params[:parameters]) if params[:parameters].size > 0
@@ -45,9 +46,9 @@ class PartsController < ApplicationController
   end
 
   def tagged
-    @parts = Tag.find(params[:tag_ids]).taggings.map{|tagging| Part.find(tagging.taggable_id)}
-    @tags ||= Tag.all
-    render :action => :index
+    #taggings.map{|tagging| Part.find(tagging.taggable_id)}
+    @parts = Tag.find(params[:tag_ids]).parts
+    @tag = Tag.find(params[:tag_ids])
   end
 
   def add_tags

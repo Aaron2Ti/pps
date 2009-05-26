@@ -8,6 +8,7 @@
     %tr
       %td= link_to p.name, edit_parameter_path(p)
       %td= p.value
+      %td= link_to '编辑', edit_parameter_path(p)
       %td= link_to '删除', parameter_path(p), :method => :delete
   %tr== <td></td><td></td><td>#{link_to '返回', :back}</td>
 

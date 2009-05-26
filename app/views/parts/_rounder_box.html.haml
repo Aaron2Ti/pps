@@ -2,5 +2,6 @@
   %tr
     %td.left
     %td
-      %abbr{:title => content}= truncate(content, :length => 8)
+      %abbr{:title => content}= link_to truncate(content.name, :length => 8), |
+                                                       supplier_path(content) |
     %td.right

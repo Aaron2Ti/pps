@@ -1,6 +1,8 @@
 - content_for(:head) do
   = stylesheet_link_tag 'form'
 
+%h2== 修改模型“#{@part.name}”的参数“#{@parameter.name}”
+
 = error_messages_for :parameter
 
 - form_for @parameter, :method => :put do |f|

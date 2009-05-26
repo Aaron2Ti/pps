@@ -5,6 +5,7 @@
 .paper= render :partial => '/parts/part_box', :locals => {:part => @part}
 - form_for @part, :url => account_part_path(@part) do |f|
   .field
+    %h2== 修改模型“#{@part.name}”的基本信息
     = f.label :name, '名称'
     = f.text_field :name
   .field

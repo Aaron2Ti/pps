@@ -15,4 +15,10 @@ class SuppliersController < ApplicationController
     end
   end
 
+  def show
+    @suppiler = Supplier.find params[:id]
+    @parts = []
+    10.times{ @parts << Part.all.rand }
+    @parts.uniq!
+  end
 end

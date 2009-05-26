@@ -1,0 +1,12 @@
+.papers
+  %table{:style => 'width: 100%'}
+    %caption== 标记有“#{@tag.name}”的3D模型列表:
+    - @parts.in_groups_of(4) do |parts_row|
+      %tr
+        - parts_row.each do |part|
+          - if part
+            %td
+              .paper
+                = render( :partial => 'parts/part_box', :locals => {:part => part})
+                = link_to '查看', part_path(part), :class => 'show'
+  = link_to '返回', :back
