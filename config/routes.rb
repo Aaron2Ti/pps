@@ -6,9 +6,9 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :user_session
   map.resource :account, :controller => 'users'
   map.resources :users
+  
   map.resources :suppliers
   map.resources :tags, :only => [:index]
-#  map.resources :taggings
 
   map.with_options(:namespace   => 'account/',
                    :name_prefix => 'account_',
@@ -18,7 +18,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :parts,
                 :member => {:add_tags => :put, :change => :get, :transform => :put},
-#                :collection => {:tag => :get},
+              # :collection => {:tag => :get},
                 :has_many => [:parameters],
                 :shallow => true
   map.papers_tagged '/parts/tagged/:tag_ids',

@@ -60,7 +60,7 @@ module Model
   end
 
   # generate the wrl and jpgs for preview
-  # TODO Currently che drawing seems not in the middle of the generated pics
+  # TODO Currently the drawing seems not in the middle of the generated pics
   def pre_process(tmp_dir)
     FileUtils.rm(tmp_dir) if File.exist?(tmp_dir) && !File.directory?(tmp_dir)
     FileUtils.mkdir(tmp_dir) unless File.directory?(tmp_dir)

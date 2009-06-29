@@ -1,5 +1,5 @@
 development:
-  adapter: sqlite3
+  adapter: <%= (PLATFORM =~ /java/) ? 'jdbcsqlite3' : 'sqlite3' %>
   # adapter: jdbcsqlite3
   database: db/development.sqlite3
   pool: 1
@@ -9,8 +9,8 @@ development:
 #   encoding: utf8
 #   database: pps
 #   pool: 5
-#   username: tbq
-#   password: tbq
+#   username:
+#   password:
 #   host: 192.168.6.66
 
 # Warning: The database defined as "test" will be erased and

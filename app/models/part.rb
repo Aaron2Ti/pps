@@ -11,9 +11,9 @@ class Part < Paper
   after_destroy :delete_file
 
   validates_format_of :filename, :with => /^.+\.SLDPRT$/i, :on => :create,
-    :message => 'Only Accept SolidWork\'s Part Drawing Currently'
+                      :message => 'Only Accept SolidWork\'s Part Drawing Currently'
   validates_inclusion_of :size, :in => 1.kilobyte..5.megabytes, :on => :create,
-    :message => 'Only Accept File Size Between 1KB and 5MB'
+                         :message => 'Only Accept File Size Between 1KB and 5MB'
   validates_presence_of :name
 
   def self.search(keywords)

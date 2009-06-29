@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 13) do
+ActiveRecord::Schema.define(:version => 14) do
 
   create_table "archives", :force => true do |t|
     t.string  "desc"
@@ -40,6 +40,12 @@ ActiveRecord::Schema.define(:version => 13) do
     t.string  "desc"
     t.float   "value",    :default => 10.0
     t.string  "def"
+  end
+
+  create_table "suppliers", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "taggings", :force => true do |t|
